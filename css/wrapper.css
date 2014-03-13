@@ -1,0 +1,41 @@
+.wrapper {
+  overflow: hidden;
+  position: relative;
+}
+ 
+.ribbon-wrapper-acquia {
+  width: 85px;
+  height: 88px;
+  overflow: hidden;
+  position: absolute;
+  top: -3px;
+  right: -3px;
+}
+ 
+.ribbon-acquia {
+  font: bold 15px Sans-Serif;
+  color: #333;
+  text-align: center;
+  text-align: center;
+  text-shadow: rgba(255,255,255,0.5) 0px 1px 0px;
+  -webkit-transform: rotate(45deg);
+  -moz-transform:    rotate(45deg);
+  -ms-transform:     rotate(45deg);
+  -o-transform:      rotate(45deg);
+  position: relative;
+  padding: 20px 0px 7px 0px;
+  left: -1px;
+  top: 1px;
+  width: 120px;
+  z-index: 1200;
+  background-image: -webkit-linear-gradient(top, rgb(78,159,234) 0%, rgb(69,132,221) 100%);
+  background-image: linear-gradient(rgb(78,159,234) 0%,rgb(69,132,221) 100%);
+  color: #FFF;
+  -webkit-box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
+  -moz-box-shadow:    0px 0px 3px rgba(0,0,0,0.3);
+  box-shadow:         0px 0px 3px rgba(0,0,0,0.3);
+}
+
+.ribbon-acquia a {
+  background: transparent;
+}
