@@ -65,7 +65,7 @@
   margin-left: -15px;
   margin-right: -15px;
   height: 12px;
-  background: url('../img/color_stripe.png') repeat-x;
+  background: url('./img/color_stripe.png') repeat-x;
 }
 
 /* editor */
@@ -111,6 +111,6 @@ body.scs-edit-mode img.scs-editable.scs-component-selected {
   width: 32px;
   height: 32px;
   overflow: hidden;
-  background-image: url('../img/user.png') no-repeat;
+  background-image: url('./img/user.png') no-repeat;
   background-size: cover;
 }
