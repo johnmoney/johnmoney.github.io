@@ -598,12 +598,12 @@ function renderAccount() {
 }
 
 function initPage() {
+  console.log('initPage');
   renderFilters();
   renderCards();
   renderAccount();
 }
 
-console.log('home.js');
 if (document.addEventListener) {
   document.addEventListener('scsrenderstart', initPage, false); 
 }
