@@ -603,6 +603,7 @@ function initPage() {
   renderAccount();
 }
 
+console.log('home.js');
 if (document.addEventListener) {
   document.addEventListener('scsrenderstart', initPage, false); 
 }
