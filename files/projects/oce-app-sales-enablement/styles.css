@@ -1,0 +1,116 @@
+/* bootstrap overrides */
+.app {
+  font-family: 'Oracle Sans',-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Arial,sans-serif;
+  color: #161513;
+}
+.app .bg-light {
+  background-color: #f5f4f2 !important;
+}
+.app .h5, .app h5 {
+  font-size: 1rem;
+}
+
+/* utility */
+.h-20 {
+  height: 20vh;
+}
+.h-33 {
+  height: 33vh;
+}
+.h-50 {
+  height: 50vh;
+}
+.flex-grow-1 {
+  flex-grow: 1;
+}
+.visuallyhidden {
+  opacity: 0;
+}
+.overflow-hidden {
+  overflow: hidden;
+}
+.app .ball-pulse {
+  transform: scale(2.5, 2.5);
+}
+.app .ball-pulse > div {
+  background-color: #007bff;
+}
+.lines-3 {
+  position: relative;
+  height: 3.6em; /* exactly three lines */
+  overflow: hidden;
+}
+.lines-3:after {
+  content: "";
+  text-align: right;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 40%;
+  height: 1.2em;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
+}
+
+/* navbar */
+.app .navbar-brand {
+  font-size: 1rem;
+  color: #161513;
+}
+.app main {
+  margin-top: 50px;
+}
+.app main::before {
+  display: block;
+  content: "";
+  margin-left: -15px;
+  margin-right: -15px;
+  height: 12px;
+  background: url('../img/color_stripe.png') repeat-x;
+}
+
+/* editor */
+.app.scs-edit-mode {
+  padding: 0;
+}
+.app .scs-slot-empty {
+  width: 100%;
+}
+body.scs-edit-mode img.scs-editable.scs-component-selected {
+  outline: 1px #008568 solid;
+  outline-offset: 0;
+}
+
+/* cards 16:9 */
+.app .card {
+  min-width: 256px;
+  max-width: 256px;
+}
+.app .card-title {
+  font-size: 1rem;
+}
+.app .card-body {
+  padding: 0.75rem;
+}
+.app .card-img-top {
+  height: 144px;
+  object-fit: cover;
+  object-position: 0 0;
+}
+.app .card-footer {
+  font-size: 0.85rem;
+  padding: 0.75rem;
+}
+
+/* filters */
+.app .treejs > .treejs-nodes {
+  padding-left: 0;
+}
+
+/* user */
+.user {
+  width: 32px;
+  height: 32px;
+  overflow: hidden;
+  background-image: url('../img/user.png') no-repeat;
+  background-size: cover;
+}
