@@ -402,6 +402,9 @@ function createAlert(html, type = 'success', icon = '') {
   let alert = document.createElement('div');
   alert.classList.add('alert');
   alert.classList.add('alert-' + type);
+  alert.classList.add('alert-dismissible');
+  alert.classList.add('fade');
+  alert.classList.add('show');
   alert.setAttribute('role', 'alert');
 
   if (!icon) {
@@ -418,7 +421,7 @@ function createAlert(html, type = 'success', icon = '') {
   }
   const iconHTML = `<i class="fa fa-${icon} mr-2" aria-hidden="true"></i>`;
 
-  alert.innerHTML = iconHTML + html + '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+  alert.innerHTML = iconHTML + html + '<button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>';
   alerts.appendChild(alert);
 }
 
