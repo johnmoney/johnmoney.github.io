@@ -268,7 +268,7 @@
     //remove extension from file name
     const itemName =  item.name.substr(0, item.name.lastIndexOf('.'));
 
-    let card = document.createElement('div');
+    let card = document.createElement('button');
     card.classList.add('card');
     card.classList.add('mr-3');
     card.classList.add('mb-3');
