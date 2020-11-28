@@ -325,9 +325,8 @@ function cardDetail() {
     console.log(`loading asset ${id}`);
     const sidebar = document.getElementById('sidebar');
     sidebar.innerHTML = id;
-    sidebar.modal('show');
-//    sidebar.style.display = 'block';
-//    sidebar.classList.add('show');
+    sidebar.style.display = 'block';
+    sidebar.classList.add('show');
   }
 }
 
