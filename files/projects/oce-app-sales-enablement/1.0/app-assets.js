@@ -491,8 +491,8 @@ function renderCards() {
       const results = document.getElementById('results');
       results.innerHTML = '';
       let cards = document.createElement("div");
-      cards.classList.add('card-deck');
       cards.classList.add('d-flex');
+      cards.classList.add('flex-wrap');
       results.appendChild(cards);
 
       //add cards
@@ -518,5 +518,4 @@ function renderCards() {
 function initPage() {
   renderFilters();
   renderCards();
-  renderAccount();
 }
