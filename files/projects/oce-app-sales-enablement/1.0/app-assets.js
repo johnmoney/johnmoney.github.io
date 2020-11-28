@@ -325,6 +325,7 @@
 
   //card detail
   function cardDetail() {
+    const sidebar = document.getElementById('sidebar');
     let html = `
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -344,9 +345,7 @@
     let id = this.getAttribute('data-oce-id');
     if (id) {
       console.log(`loading asset ${id}`);
-  //    sidebar.modal('show');
-  //    sidebar.style.display = 'block';
-  //    sidebar.classList.add('show');
+      var modal = new bootstrap.Modal(sidebar)
     }
   }
 
@@ -524,10 +523,5 @@
   //main entry
   renderFilters();
   renderCards();
-
-  const sidebar = document.getElementById('sidebar');
-  sidebar.addEventListener('show.bs.modal', function (event) {
-    console.log('show.bs.modal');
-  });
 
 })(window);
