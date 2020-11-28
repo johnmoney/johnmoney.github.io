@@ -339,7 +339,7 @@ function cardDetail() {
   let id = this.getAttribute('data-oce-id');
   if (id) {
     console.log(`loading asset ${id}`);
-    sidebar.modal('show');
+//    sidebar.modal('show');
 //    sidebar.style.display = 'block';
 //    sidebar.classList.add('show');
   }
