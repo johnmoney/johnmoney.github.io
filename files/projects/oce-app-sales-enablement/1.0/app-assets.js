@@ -339,7 +339,7 @@ function cardDetail() {
   </div>
 </div>`;
 
-  document.getElementById('sidebar').innerHTML = html;
+//  document.getElementById('sidebar').innerHTML = html;
 
   let id = this.getAttribute('data-oce-id');
   if (id) {
