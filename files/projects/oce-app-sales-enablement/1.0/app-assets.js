@@ -265,12 +265,16 @@
   //create Bootstrap card
   function renderCard(item) {
     //console.debug(item);
-    let card = document.createElement('button');
+    //remove extension from file name
+    const itemName =  item.name.substr(0, item.name.lastIndexOf('.'));
+
+    let card = document.createElement('div');
     card.classList.add('card');
     card.classList.add('mr-3');
     card.classList.add('mb-3');
     card.classList.add('p-0');
     card.classList.add('text-left');
+    card.setAttribute('title', itemName);
     card.setAttribute('data-oce-id', item.id);
     card.setAttribute('data-toggle', 'modal');
     card.setAttribute('data-target', '#sidebar');
@@ -289,7 +293,7 @@
     let cardTitle = document.createElement('h5');
     cardTitle.classList.add('card-title');
     cardTitle.classList.add('lines-3');
-    cardTitle.innerHTML = item.name.substr(0, item.name.lastIndexOf('.'));
+    cardTitle.textContent = itemName;
     cardBody.appendChild(cardTitle);
 
     let cardText = document.createElement('div');
@@ -319,18 +323,18 @@
     cardFooter.innerHTML = `Updated <span class="timeago" datetime="${item.updatedDate.value}">${item.updatedDate.value}</span>`;
     card.appendChild(cardFooter);
 
-    card.addEventListener("click", cardDetail);
+    card.addEventListener("click", renderAsset);
     return card;
   }
 
   //card detail
-  function cardDetail() {
+  function renderAsset() {
     const sidebar = document.getElementById('sidebar');
     let html = `
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Loading asset...</h5>
+        <h5 class="modal-title">${this.getAttribute('title')}</h5>
         <button type="button" class="btn btn-sm btn-outline-primary" data-dismiss="modal" aria-label="Close">
           <i class="fa fa-times" aria-hidden="true"></i>
         </button>
@@ -339,8 +343,7 @@
       </div>
     </div>
   </div>`;
-
-  //  document.getElementById('sidebar').innerHTML = html;
+  sidebar.innerHTML = html;
 
     let id = this.getAttribute('data-oce-id');
     if (id) {
