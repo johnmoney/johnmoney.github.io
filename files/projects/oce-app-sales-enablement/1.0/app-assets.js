@@ -1,7 +1,10 @@
+/* app-assets.js v1.0 */
+(function (window) {
+
 /* Config *******************************/
 const contentUri = '/content/published/api/v1.1';
 const documentsUri = '/pxysvc/proxy/documents';
-const channelToken = '3611fcc4416043b59811b0b2de2f03c6';
+//const channelToken = '3611fcc4416043b59811b0b2de2f03c6';
 const folderId =      'FAFC0430B0461318672BB0ECB4507B76ADA285099EDC';
 const validMimeTypes = ['application/vnd.ms-powerpoint', 'application/vnd.openxmlformats-officedocument.presentationml.presentation', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/pdf'];
 const filterTaxonomies = ['E29AD592DC2A444B99D88CDDBFC13C96', 'EF3FE32A8506461490477A32232C4344'];
@@ -39,7 +42,7 @@ function getItems() {
       taxonomyQueryString = ' AND (' + taxonomyQuery.join(' AND ') + ')';
     }
 
-    let uri = `${contentUri}/items?q=(type eq "DigitalAsset"${taxonomyQueryString})&fields=all&channelToken=${channelToken}`;
+    let uri = `${contentUri}/items?q=(type eq "DigitalAsset"${taxonomyQueryString})&fields=all&channelToken=${config.channelToken}`;
     let queryHash = 'query:' + hash(uri) + ':' + getRoundedDate(queryCache);
     let items = JSON.parse(sessionStorage.getItem(queryHash));
     if (items) {
@@ -80,7 +83,7 @@ function getItems() {
 //promise based asset download
 function getFile(item) {
   return new Promise((resolve, reject) => {
-    const uri = `${contentUri}/assets/${item.id}/native?channelToken=${channelToken}`;
+    const uri = `${contentUri}/assets/${item.id}/native?channelToken=${config.channelToken}`;
     let xhr = new XMLHttpRequest();
 
     xhr.open('GET', uri, true);
@@ -193,7 +196,7 @@ function setFileCollection(fileId, item) {
 //https://docs.oracle.com/en/cloud/paas/content-cloud/rest-api-content-delivery/op-published-api-v1.1-taxonomies-id-get.html
 function getTaxonomy(id) {
   return new Promise((resolve, reject) => {
-    let uri = `${contentUri}/taxonomies/${id}?channelToken=${channelToken}`;
+    let uri = `${contentUri}/taxonomies/${id}?channelToken=${config.channelToken}`;
     let xhr = new XMLHttpRequest();
 
     xhr.open('GET', uri, true);
@@ -218,7 +221,7 @@ function getTaxonomy(id) {
 //https://docs.oracle.com/en/cloud/paas/content-cloud/rest-api-content-delivery/op-published-api-v1.1-taxonomies-id-categories-get.html
 function getCategories(id) {
   return new Promise((resolve, reject) => {
-    let uri = `${contentUri}/taxonomies/${id}/categories?limit=9999&orderBy=position:asc&fields=all&channelToken=${channelToken}`;
+    let uri = `${contentUri}/taxonomies/${id}/categories?limit=9999&orderBy=position:asc&fields=all&channelToken=${config.channelToken}`;
     let xhr = new XMLHttpRequest();
 
     xhr.open('GET', uri, true);
@@ -490,3 +493,4 @@ function initPage() {
   renderCards();
   renderAccount();
 }
+})(window);
