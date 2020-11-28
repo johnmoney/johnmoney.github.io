@@ -528,6 +528,6 @@
   const sidebar = document.getElementById('sidebar');
   sidebar.addEventListener('show.bs.modal', function (event) {
     console.log('show.bs.modal');
-  }
+  });
 
 })(window);
