@@ -320,11 +320,25 @@ function renderCard(item) {
 
 //card detail
 function cardDetail() {
+  let html = `
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Content options</h5>
+      <button type="button" class="btn btn-sm btn-outline-primary" data-dismiss="modal" aria-label="Close">
+        <i class="fa fa-times" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div class="modal-body">
+    </div>
+  </div>
+</div>`;
+
+  document.getElementById('sidebar').innerHTML = html;
+
   let id = this.getAttribute('data-oce-id');
   if (id) {
     console.log(`loading asset ${id}`);
-    const sidebar = document.getElementById('sidebar');
-    sidebar.innerHTML = id;
     sidebar.style.display = 'block';
     sidebar.classList.add('show');
   }
