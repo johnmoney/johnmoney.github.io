@@ -343,7 +343,7 @@
       </div>
     </div>
   </div>`;
-  sidebar.innerHTML = html;
+//  sidebar.innerHTML = html;
 
     let id = this.getAttribute('data-oce-id');
     if (id) {
