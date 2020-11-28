@@ -3,6 +3,6 @@
   "channelToken": "3611fcc4416043b59811b0b2de2f03c6",
   "assets": {
     "validMimeTypes" : ["application/vnd.ms-powerpoint", "application/vnd.openxmlformats-officedocument.presentationml.presentation", "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "application/pdf"],
-    "filterTaxonomies" : ["E29AD592DC2A444B99D88CDDBFC13C96", "EF3FE32A8506461490477A32232C4344"]
+    "filterTaxonomies" : ["E29AD592DC2A444B99D88CDDBFC13C96", "B965F44143D043739D6480AEBC208962", "EF3FE32A8506461490477A32232C4344"]
   }
 }
