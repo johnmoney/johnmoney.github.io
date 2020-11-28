@@ -119,7 +119,7 @@
 #sidebar.modal .modal-dialog {
   position: fixed;
   margin: auto;
-  width: 500px;
+  width: 700px;
   max-width: 100%;
   height: 100%;
 }
@@ -131,7 +131,7 @@
   padding: 15px 15px 80px;
 }
 #sidebar.modal.fade .modal-dialog {
-  right: -500px;
+  right: -700px;
   -webkit-transition: opacity 0.3s linear, right 0.3s ease-out;
   -moz-transition: opacity 0.3s linear, right 0.3s ease-out;
   -o-transition: opacity 0.3s linear, right 0.3s ease-out;
