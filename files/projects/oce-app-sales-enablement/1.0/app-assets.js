@@ -3,10 +3,9 @@
 /* Config *******************************/
 const contentUri = '/content/published/api/v1.1';
 const documentsUri = '/pxysvc/proxy/documents';
-//const channelToken = '3611fcc4416043b59811b0b2de2f03c6';
 const folderId =      'FAFC0430B0461318672BB0ECB4507B76ADA285099EDC';
-const validMimeTypes = ['application/vnd.ms-powerpoint', 'application/vnd.openxmlformats-officedocument.presentationml.presentation', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/pdf'];
-const filterTaxonomies = ['E29AD592DC2A444B99D88CDDBFC13C96', 'EF3FE32A8506461490477A32232C4344'];
+//const validMimeTypes = ['application/vnd.ms-powerpoint', 'application/vnd.openxmlformats-officedocument.presentationml.presentation', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/pdf'];
+//const filterTaxonomies = ['E29AD592DC2A444B99D88CDDBFC13C96', 'EF3FE32A8506461490477A32232C4344'];
 const documentCollection = 'Sales Enablement';
 const documentSourceField = 'Source';
 const documentSourceVersionField = 'Source version';
@@ -60,7 +59,7 @@ function getItems() {
             const json = JSON.parse(this.response);
             let items = [];
             json.items.forEach(function(item) {
-              if (validMimeTypes.includes(item.fields.mimeType)) {
+              if (config.assets.validMimeTypes.includes(item.fields.mimeType)) {
                 items.push(item);
               }
               else {
