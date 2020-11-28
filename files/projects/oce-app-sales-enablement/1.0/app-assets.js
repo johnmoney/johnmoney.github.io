@@ -265,9 +265,12 @@ function getCategories(id) {
 //create Bootstrap card
 function renderCard(item) {
   //console.debug(item);
-  let card = document.createElement('div');
+  let card = document.createElement('button');
   card.classList.add('card');
+  card.classList.add('mr-3');
   card.classList.add('mb-3');
+  card.classList.add('p-0');
+  card.classList.add('text-left');
   card.setAttribute('data-oce-id', item.id);
   card.setAttribute('data-toggle', 'modal');
   card.setAttribute('data-target', '#sidebar');
