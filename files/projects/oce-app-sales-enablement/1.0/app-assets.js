@@ -268,6 +268,7 @@ function renderCard(item) {
   let card = document.createElement('div');
   card.classList.add('card');
   card.classList.add('mb-3');
+  card.setAttribute('data-oce-id', item.id);
 
   let cardTop = document.createElement('img');
   cardTop.classList.add('card-img-top');
@@ -319,7 +320,10 @@ function renderCard(item) {
 
 //card detail
 function cardDetail() {
-  console.log(this);
+  let id = this.getAttribute('data-oce-id');
+  if (id) {
+    console.log(`loading asset ${id}`);
+  }
 }
 
 //copy asset button
