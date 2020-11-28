@@ -330,20 +330,8 @@
   //card detail
   function renderAsset() {
     const sidebar = document.getElementById('sidebar');
-    let html = `
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">${this.getAttribute('title')}</h5>
-        <button type="button" class="btn btn-sm btn-outline-primary" data-dismiss="modal" aria-label="Close">
-          <i class="fa fa-times" aria-hidden="true"></i>
-        </button>
-      </div>
-      <div class="modal-body">
-      </div>
-    </div>
-  </div>`;
-//  sidebar.innerHTML = html;
+    const modalTitle = sidebar.getElementsByClassName('modal-title')[0];
+    modalTitle.textContent = this.getAttribute('title');
 
     let id = this.getAttribute('data-oce-id');
     if (id) {
@@ -526,5 +514,20 @@
   //main entry
   renderFilters();
   renderCards();
+  const sidebar = document.getElementById('sidebar');
+  let html = `
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Loading...</h5>
+      <button type="button" class="btn btn-sm btn-outline-primary" data-dismiss="modal" aria-label="Close">
+        <i class="fa fa-times" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div class="modal-body">
+    </div>
+  </div>
+</div>`;
+  sidebar.innerHTML = html;
 
 })(window);
