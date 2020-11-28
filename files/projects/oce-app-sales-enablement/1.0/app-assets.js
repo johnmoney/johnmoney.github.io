@@ -1,6 +1,4 @@
 /* app-assets.js v1.0 */
-(function (window) {
-
 /* Config *******************************/
 const contentUri = '/content/published/api/v1.1';
 const documentsUri = '/pxysvc/proxy/documents';
@@ -493,4 +491,3 @@ function initPage() {
   renderCards();
   renderAccount();
 }
-})(window);
