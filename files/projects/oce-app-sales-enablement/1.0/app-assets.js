@@ -1,4 +1,5 @@
 /* app-assets.js v1.0 */
+
 /* Config *******************************/
 const contentUri = '/content/published/api/v1.1';
 const documentsUri = '/pxysvc/proxy/documents';
