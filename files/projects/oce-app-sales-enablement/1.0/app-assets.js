@@ -323,10 +323,11 @@ function cardDetail() {
   let id = this.getAttribute('data-oce-id');
   if (id) {
     console.log(`loading asset ${id}`);
-    const results = document.getElementById('sidebar');
+    const sidebar = document.getElementById('sidebar');
     sidebar.innerHTML = id;
-    sidebar.style.display = 'block';
-    sidebar.classList.add('show');
+    sidebar.modal('show');
+//    sidebar.style.display = 'block';
+//    sidebar.classList.add('show');
   }
 }
 
