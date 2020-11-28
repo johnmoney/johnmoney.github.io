@@ -269,6 +269,8 @@ function renderCard(item) {
   card.classList.add('card');
   card.classList.add('mb-3');
   card.setAttribute('data-oce-id', item.id);
+  card.setAttribute('data-toggle', 'modal');
+  card.setAttribute('data-target', '#sidebar');
 
   let cardTop = document.createElement('img');
   cardTop.classList.add('card-img-top');
