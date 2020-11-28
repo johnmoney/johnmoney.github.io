@@ -4,8 +4,6 @@
 const contentUri = '/content/published/api/v1.1';
 const documentsUri = '/pxysvc/proxy/documents';
 const folderId =      'FAFC0430B0461318672BB0ECB4507B76ADA285099EDC';
-//const validMimeTypes = ['application/vnd.ms-powerpoint', 'application/vnd.openxmlformats-officedocument.presentationml.presentation', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/pdf'];
-//const filterTaxonomies = ['E29AD592DC2A444B99D88CDDBFC13C96', 'EF3FE32A8506461490477A32232C4344'];
 const documentCollection = 'Sales Enablement';
 const documentSourceField = 'Source';
 const documentSourceVersionField = 'Source version';
@@ -315,7 +313,13 @@ function renderCard(item) {
   cardFooter.innerHTML = `Updated <span class="timeago" datetime="${item.updatedDate.value}">${item.updatedDate.value}</span>`;
   card.appendChild(cardFooter);
 
+  card.addEventListener("click", cardDetail);
   return card;
+}
+
+//card detail
+function cardDetail() {
+  console.log(this);
 }
 
 //copy asset button
