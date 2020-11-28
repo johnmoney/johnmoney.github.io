@@ -407,7 +407,7 @@ function showLoader(showLoader = true) {
 function renderFilters() {
   const filters = document.getElementById('filters');
 
-  filterTaxonomies.forEach(function(id, idx) {
+  config.assets.filterTaxonomies.forEach(function(id, idx) {
     getTaxonomy(id).then(function(taxonomy) {
       let filterGroup = document.createElement('div');
       filterGroup.classList.add('filter-group');
