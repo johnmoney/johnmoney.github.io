@@ -328,6 +328,7 @@
 
   //card detail
   function renderAsset() {
+    const id = this.getAttribute('data-oce-id');
     const sidebar = document.getElementById('sidebar');
     const modalTitle = sidebar.getElementsByClassName('modal-title')[0];
     modalTitle.textContent = this.getAttribute('title');
@@ -335,7 +336,6 @@
     const modalBody = sidebar.getElementsByClassName('modal-body')[0];
     modalBody.innerHTML = `<iframe class="document-frame" src="/documents/assetview/${id}/3/preview/html5/pvw.html"></iframe>`;
 
-    let id = this.getAttribute('data-oce-id');
     let item = JSON.parse(sessionStorage.getItem(id));
     var modal = new bootstrap.Modal(sidebar)
   }
