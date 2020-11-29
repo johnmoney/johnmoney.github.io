@@ -58,6 +58,7 @@
               let items = [];
               json.items.forEach(function(item) {
                 if (config.assets.validMimeTypes.includes(item.fields.mimeType)) {
+                  sessionStorage.setItem(item.id, JSON.stringify(item));
                   items.push(item);
                 }
                 else {
@@ -268,12 +269,10 @@
     //remove extension from file name
     const itemName =  item.name.substr(0, item.name.lastIndexOf('.'));
 
-    let card = document.createElement('button');
+    let card = document.createElement('div');
     card.classList.add('card');
     card.classList.add('mr-3');
     card.classList.add('mb-3');
-    card.classList.add('p-0');
-    card.classList.add('text-left');
     card.setAttribute('title', itemName);
     card.setAttribute('data-oce-id', item.id);
     card.setAttribute('data-toggle', 'modal');
@@ -333,11 +332,12 @@
     const modalTitle = sidebar.getElementsByClassName('modal-title')[0];
     modalTitle.textContent = this.getAttribute('title');
 
+    const modalBody = sidebar.getElementsByClassName('modal-body')[0];
+    modalBody.innerHTML = `<iframe class="document-frame" src="/documents/assetview/${id}/3/preview/html5/pvw.html"></iframe>`;
+
     let id = this.getAttribute('data-oce-id');
-    if (id) {
-      console.log(`loading asset ${id}`);
-      var modal = new bootstrap.Modal(sidebar)
-    }
+    let item = JSON.parse(sessionStorage.getItem(id));
+    var modal = new bootstrap.Modal(sidebar)
   }
 
   //copy asset button
@@ -519,13 +519,12 @@
 <div class="modal-dialog" role="document">
   <div class="modal-content">
     <div class="modal-header">
-      <h5 class="modal-title">Loading...</h5>
+      <h5 class="modal-title text-truncate"></h5>
       <button type="button" class="btn btn-sm btn-outline-primary" data-dismiss="modal" aria-label="Close">
         <i class="fa fa-times" aria-hidden="true"></i>
       </button>
     </div>
-    <div class="modal-body">
-    </div>
+    <div class="modal-body"></div>
   </div>
 </div>`;
   sidebar.innerHTML = html;
