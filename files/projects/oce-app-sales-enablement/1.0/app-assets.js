@@ -334,7 +334,7 @@
     modalTitle.textContent = this.getAttribute('title');
 
     const modalBody = sidebar.getElementsByClassName('modal-body')[0];
-    modalBody.innerHTML = `<iframe class="document-frame" src="/documents/assetview/${id}/3/preview/html5/pvw.html"></iframe>`;
+    modalBody.innerHTML = `<div id="pages-area" style="width: 556px; height: 552px;"><iframe class="document-frame" src="/documents/assetview/${id}/3/preview/html5/pvw.html"></iframe></div>`;
 
     let item = JSON.parse(sessionStorage.getItem(id));
     var modal = new bootstrap.Modal(sidebar)
