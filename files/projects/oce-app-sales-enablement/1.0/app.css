@@ -82,13 +82,18 @@
 .app #search {
   position: relative;
 }
-.app #search .fa {
+.app #search .fa-search {
   position: absolute;
   left: 8px;
   top: 10px;
 }
 .app #search input {
   padding-left: 30px;
+}
+.app #search .btn {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 .app main {
   margin-top: 82px;

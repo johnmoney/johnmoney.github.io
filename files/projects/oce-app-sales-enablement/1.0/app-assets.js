@@ -69,8 +69,8 @@
     });
   }
 
-  //search
-  function searchSubmit(event) {
+  //handle search form submit
+  function searchSubmit(e) {
     let q = document.getElementById('search').getElementsByTagName('input')[0].value;
     //@todo run through stop words
     //@todo extract taxonomies
@@ -78,7 +78,21 @@
     searchQuery = q;
     renderCards();
 
-    event.preventDefault();
+    let searchClear = document.getElementById('search-clear');
+    if (q) {
+      searchClear.classList.remove('d-none');
+    }
+    else {
+      searchClear.classList.add('d-none');
+    }
+
+    e.preventDefault();
+  }
+
+  //clear search query
+  function searchClear(e) {
+    document.getElementById('search').getElementsByTagName('input')[0].value = '';
+    searchSubmit();
   }
 
     //promise based content api search categories
@@ -330,7 +344,7 @@
   renderFilters();
   renderCards();
 
-  const search = document.getElementById('search');
-  search.addEventListener('submit', searchSubmit);
+  document.getElementById('search').addEventListener('submit', searchSubmit);
+  document.getElementById('search-clear').addEventListener('click', searchClear);
 
 })(window);
