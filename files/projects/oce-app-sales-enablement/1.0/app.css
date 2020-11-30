@@ -1,13 +1,27 @@
+/* app.css v1 */
 /* bootstrap overrides */
 .app {
   font-family: 'Oracle Sans',-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Arial,sans-serif;
   color: #161513;
 }
-.app .bg-light {
+.bg-light {
   background-color: #f5f4f2 !important;
 }
-.app .h5, .app h5 {
-  font-size: 1rem;
+.h5, h5 {
+  font-size: 1rem !important;
+}
+.bg-primary {
+  background-color: #594564 !important;
+}
+.bg-secondary {
+  background-color: #b7a1c4 !important;
+}
+.bg-info {
+  background-color: #594564 !important;
+}
+.btn-primary {
+  background-color: #594564 !important;
+  border-color: #594564 !important;
 }
 
 /* utility */
@@ -33,7 +47,7 @@
   transform: scale(2.5, 2.5);
 }
 .app .ball-pulse > div {
-  background-color: #007bff;
+  background-color: #594564;
 }
 .lines-3 {
   position: relative;

@@ -122,10 +122,7 @@
     item.version = this.getAttribute('data-version');
     if (item.id && item.name && item.mimeType && item.version) {
       showLoader();
-
-      let sidebar = document.getElementById('sidebar');
-      var modal = bootstrap.Modal.getInstance(sidebar) // Returns a Bootstrap modal instance
-      modal.hide()
+      bootstrap.Modal.getInstance(document.getElementById('sidebar')).hide();
 
       getFile(item).then(function(file) {
         //create folder
@@ -238,6 +235,7 @@
 
     //add footer
     const modalFooter = sidebar.getElementsByClassName('modal-footer')[0];
+    modalFooter.innerHTML = '';
     let button = document.createElement('div');
     button.classList.add('btn');
     button.classList.add('btn-primary');
