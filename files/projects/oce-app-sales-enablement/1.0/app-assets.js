@@ -94,6 +94,8 @@
     const form = document.getElementById('search');
     form.getElementsByTagName('input')[0].value = '';
     form.dispatchEvent(new Event('submit'));
+
+    e.preventDefault();
   }
 
     //promise based content api search categories
