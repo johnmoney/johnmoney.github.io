@@ -1,13 +1,7 @@
 /* app-assets.js v1.0 */
 (function (window) {
+  let searchQuery = '';
   let selectedCategories = new Object;
-
-  //search
-  function searchSubmit(event) {
-    let q = document.getElementById('search').getElementsByTagName('input')[0].value;
-    console.log('q=' + q);
-    event.preventDefault();
-  }
 
   //promise based content api search published items
   //https://docs.oracle.com/en/cloud/paas/content-cloud/rest-api-content-delivery/op-published-api-v1.1-items-get.html
@@ -34,8 +28,9 @@
       if (taxonomyQuery.length) {
         taxonomyQueryString = ' AND (' + taxonomyQuery.join(' AND ') + ')';
       }
+      let searchQueryString = searchQuery ? `&default="${searchQuery}"` : '';
 
-      let uri = `${config.api.content}/items?q=(type eq "DigitalAsset"${taxonomyQueryString})&fields=all&channelToken=${config.channelToken}`;
+      let uri = `${config.api.content}/items?q=(type eq "DigitalAsset"${taxonomyQueryString})${searchQueryString}&fields=all&channelToken=${config.channelToken}`;
       let queryHash = 'query:' + hash(uri) + ':' + getRoundedDate(config.api.cacheMinutes);
       let items = JSON.parse(sessionStorage.getItem(queryHash));
       if (items) {
@@ -74,7 +69,19 @@
     });
   }
 
-  //promise based content api search categories
+  //search
+  function searchSubmit(event) {
+    let q = document.getElementById('search').getElementsByTagName('input')[0].value;
+    //@todo run through stop words
+    //@todo extract taxonomies
+    console.log('q=' + q);
+    searchQuery = q;
+    renderCards();
+
+    event.preventDefault();
+  }
+
+    //promise based content api search categories
   //https://docs.oracle.com/en/cloud/paas/content-cloud/rest-api-content-delivery/op-published-api-v1.1-taxonomies-id-get.html
   function getTaxonomy(id) {
     return new Promise((resolve, reject) => {
