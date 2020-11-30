@@ -309,7 +309,7 @@
         }
       };
       var events = {};
-      var frameElement = OracleCEUI.assetsView.createFrame(options, events);
+      var frameElement = OracleCEUI.assetViewer.createFrame(options, events);
       preview.appendChild(frameElement);
     });
     //`<div class="preview"><iframe class="document-frame" src="/documents/assetview/${id}/1/preview/html5/pvw.html"></iframe></div>`;
