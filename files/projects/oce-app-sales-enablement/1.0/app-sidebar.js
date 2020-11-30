@@ -228,7 +228,6 @@
     const modalTitle = sidebar.getElementsByClassName('modal-title')[0];
     modalTitle.textContent = card.getAttribute('title');
     let item = JSON.parse(sessionStorage.getItem(id));
-    console.log(item);
 
     const modalBody = sidebar.getElementsByClassName('modal-body')[0];
     modalBody.innerHTML = '';
@@ -237,6 +236,7 @@
     let preview = document.createElement('div');
     preview.classList.add('preview');
     modalBody.appendChild(preview);
+    OracleCEUI.oceUrl = config.api.url;
     OracleCEUI.ssoInit().then(function() {
       var options = {
         "component": "assetViewer",
@@ -298,8 +298,8 @@
             "mute": false
           },
           "views": {},
-          "id": id,
-          "version": "1"
+          "id": item.id,
+          "version": item.fields.version
         },
         "v1": {
           "show_branding": false,
