@@ -21,6 +21,11 @@
   color: #594564 !important;
   border-color: #594564 !important;
 }
+.btn-outline-primary:hover {
+  color: #fff;
+  background-color: #594564 !important;
+  border-color: #594564 !important;
+}
 .bg-secondary {
   background-color: #b7a1c4 !important;
 }
