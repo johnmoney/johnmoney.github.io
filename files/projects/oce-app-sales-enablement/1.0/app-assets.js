@@ -72,12 +72,17 @@
   //handle search form submit
   function searchSubmit(e) {
     let q = document.getElementById('search').getElementsByTagName('input')[0].value;
+    let categorySearch = JSON.parse(sessionStorage.getItem("app:categorySearch"));
 
     //@todo run through stop words
     //@todo extract taxonomies
     if (q) {
       let words = q.split(' ');
       words.forEach(function(word) {
+        let found = categorySearch.find(el => el.name === word);
+        if (found) {
+          console.log(found);
+        }
       });
     }
 
@@ -125,6 +130,9 @@
       xhr.send();
 
       let categorySearch = JSON.parse(sessionStorage.getItem("app:categorySearch"));
+      if (!categorySearch.length) {
+        categorySearch = new Array;
+      }
 
       xhr.onreadystatechange = function() {
         if (this.readyState === 4) {
@@ -153,7 +161,7 @@
                 node.text = item.name;
                 categories[categoriesIdx.indexOf(item.parent.id)].children.push(node);
 
-                categorySearch[node.id] = node.text;
+                categorySearch.push(node)
                 sessionStorage.setItem("app:categorySearch", JSON.stringify(categorySearch));
               }
             });
@@ -258,7 +266,6 @@
 
   function renderFilters() {
     const filters = document.getElementById('filters');
-    let taxomomies = new Object;
 
     config.assets.filterTaxonomies.forEach(function(id, idx) {
       getTaxonomy(id).then(function(taxonomy) {
@@ -272,10 +279,6 @@
         header.textContent = taxonomy.name;
         filterGroup.appendChild(header);
       
-        //save tree for search
-        taxomomies[id] = new Object;
-        sessionStorage.setItem('app:taxonomy', JSON.stringify(taxomomies));
-
         let treeContainer = document.createElement('div');
         treeContainer.id = id;
         filterGroup.appendChild(treeContainer);
@@ -289,9 +292,6 @@
               renderCards();
             },
           });
-
-          taxomomies[id].categories = categories;
-          sessionStorage.setItem('app:taxonomy', JSON.stringify(taxomomies));
         })
         .catch((e) => {
           console.error(e);
