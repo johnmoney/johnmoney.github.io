@@ -318,7 +318,7 @@
 
   //search
   function logSubmit(event) {
-    console.log = `Form Submitted! Time stamp: ${event.timeStamp}`;
+    console.log(`Form Submitted! Time stamp: ${event.timeStamp}`);
     event.preventDefault();
   }
   const search = document.getElementById('search');
