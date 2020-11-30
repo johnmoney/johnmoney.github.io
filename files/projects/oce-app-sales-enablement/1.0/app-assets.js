@@ -132,11 +132,6 @@
       xhr.setRequestHeader('Content-Type', 'application/json');
       xhr.send();
 
-      let categorySearch = JSON.parse(sessionStorage.getItem("app:categorySearch"));
-      if (!categorySearch) {
-        categorySearch = new Array;
-      }
-
       xhr.onreadystatechange = function() {
         if (this.readyState === 4) {
           if (this.status === 200) {
@@ -157,6 +152,10 @@
                 categoriesChildren.push(item);
               }
 
+              let categorySearch = JSON.parse(sessionStorage.getItem("app:categorySearch"));
+              if (!categorySearch) {
+                categorySearch = new Array;
+              }        
               let searchIndex = new Object;
               searchIndex.id = item.id;
               searchIndex.text = item.name;
