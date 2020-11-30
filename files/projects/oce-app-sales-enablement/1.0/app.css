@@ -72,7 +72,7 @@
   margin-top: 50px;
   width: 99%;
 }
-.app main::before {
+.app header::after {
   display: block;
   content: "";
   margin-left: -15px;
