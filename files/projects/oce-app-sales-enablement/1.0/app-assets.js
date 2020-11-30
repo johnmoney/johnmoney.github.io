@@ -259,14 +259,14 @@
         header.textContent = taxonomy.name;
         filterGroup.appendChild(header);
 
-        //save tree for search
-        taxomomies.id = new Object;
-        sessionStorage.setItem('app:taxonomy', JSON.stringify(taxomomies));
-
         let treeContainer = document.createElement('div');
-        treeContainer['id'] = new Object;
+        treeContainer.id = new Object;
         filterGroup.appendChild(treeContainer);
     
+        //save tree for search
+        taxomomies['id'] = new Object;
+        sessionStorage.setItem('app:taxonomy', JSON.stringify(taxomomies));
+
         getCategories(id).then(function(categories) {
           const myTree = new Tree('#' + id, {
             data: categories,
