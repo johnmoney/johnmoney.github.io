@@ -145,7 +145,7 @@
   function renderCard(item) {
     //console.debug(item);
     //remove extension from file name
-    const itemName =  item.name.substr(0, item.name.lastIndexOf('.')).replace("/[_-]/", " ");
+    const itemName =  item.name.substr(0, item.name.lastIndexOf('.')).replace(/[-_]/gi, " ");
 
     let card = document.createElement('div');
     card.classList.add('card');
