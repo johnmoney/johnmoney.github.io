@@ -91,8 +91,9 @@
 
   //clear search query
   function searchClear(e) {
-    document.getElementById('search').getElementsByTagName('input')[0].value = '';
-    searchSubmit();
+    const form = document.getElementById('search');
+    form.getElementsByTagName('input')[0].value = '';
+    form.dispatchEvent(new Event('submit'));
   }
 
     //promise based content api search categories
