@@ -32,9 +32,9 @@
 </div>`;
   sidebar.innerHTML = html;
 
-
-  sidebar.addEventListener('shown.bs.modal', function () {
-    console.log(shown.bs.modal);
+  sidebar.addEventListener('show.bs.modal', function (event) {
+    var card = event.relatedTarget;
+    console.log(card);
   });
 
 })(window);
