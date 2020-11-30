@@ -264,7 +264,7 @@
         sessionStorage.setItem('app:taxonomy', JSON.stringify(taxomomies));
 
         let treeContainer = document.createElement('div');
-        treeContainer.id = id;
+        treeContainer['id'] = new Object;
         filterGroup.appendChild(treeContainer);
     
         getCategories(id).then(function(categories) {
@@ -278,7 +278,7 @@
           });
 
           //save tree for search
-          taxomomies.id.categories = categories;
+          taxomomies['id'].categories = categories;
           sessionStorage.setItem('app:taxonomy', JSON.stringify(taxomomies));
         })
         .catch((e) => {
