@@ -95,9 +95,6 @@
   min-width: 256px;
   max-width: 256px;
 }
-.app .card-title {
-  font-size: 1rem;
-}
 .app .card-body {
   padding: 0.75rem;
 }
