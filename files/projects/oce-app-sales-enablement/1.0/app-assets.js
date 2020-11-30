@@ -72,8 +72,15 @@
   //handle search form submit
   function searchSubmit(e) {
     let q = document.getElementById('search').getElementsByTagName('input')[0].value;
+
     //@todo run through stop words
     //@todo extract taxonomies
+    if (q) {
+      let words = q.split(' ');
+      console.log(words);
+    }
+
+
     searchQuery = q;
     renderCards();
 
