@@ -125,6 +125,9 @@
       xhr.send();
 
       let categorySearch = sessionStorage.getItem("app:categorySearch");
+      if (!categorySearch) {
+        categorySearch = new Object;
+      }
 
       xhr.onreadystatechange = function() {
         if (this.readyState === 4) {
