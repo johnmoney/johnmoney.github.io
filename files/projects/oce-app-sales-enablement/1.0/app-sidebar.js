@@ -35,6 +35,6 @@
 
   sidebar.addEventListener('shown.bs.modal', function () {
     console.log(shown.bs.modal);
-  }
+  });
 
 })(window);
