@@ -79,10 +79,12 @@
     if (q) {
       let words = q.split(' ');
       words.forEach(function(word) {
-        console.log(word);
-        let found = categorySearch.find(el => el.text === word);
-        if (found) {
-          console.log(found);
+        for (var i = 0; i < categorySearch.length; i++) {
+          //@todo expand regex to synonyms
+          var patt = new RegExp(categorySearch[i].text);
+          if (patt.test(word)) {
+            console.debug(`found ${word}`);
+          } 
         }
       });
     }
