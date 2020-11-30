@@ -78,27 +78,10 @@
     searchQuery = q;
     renderCards();
 
-    let searchClear = document.getElementById('search-clear');
-    if (q) {
-      searchClear.classList.remove('d-none');
-    }
-    else {
-      searchClear.classList.add('d-none');
-    }
-
     e.preventDefault();
   }
 
-  //clear search query
-  function searchClear(e) {
-    const form = document.getElementById('search');
-    form.getElementsByTagName('input')[0].value = '';
-    form.dispatchEvent(new Event('submit'));
-
-    e.preventDefault();
-  }
-
-    //promise based content api search categories
+  //promise based content api search categories
   //https://docs.oracle.com/en/cloud/paas/content-cloud/rest-api-content-delivery/op-published-api-v1.1-taxonomies-id-get.html
   function getTaxonomy(id) {
     return new Promise((resolve, reject) => {
@@ -348,6 +331,5 @@
   renderCards();
 
   document.getElementById('search').addEventListener('submit', searchSubmit);
-  document.getElementById('search-clear').addEventListener('click', searchClear);
 
 })(window);
