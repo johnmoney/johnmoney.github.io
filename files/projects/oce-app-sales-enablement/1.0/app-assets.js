@@ -76,8 +76,13 @@
     //@todo run through stop words
     //@todo extract taxonomies
     if (q) {
+      const taxonomies = sessionStorage.getItem('app:taxonomy');
       let words = q.split(' ');
-      console.log(words);
+      words.forEach(function(word) {
+        taxonomies.forEach(function(taxonomy) {
+          if ()
+        }
+      });
     }
 
 
@@ -123,6 +128,8 @@
       xhr.setRequestHeader('Content-Type', 'application/json');
       xhr.send();
 
+      let categorySearch = sessionStorage.getItem("app:categorySearch");
+
       xhr.onreadystatechange = function() {
         if (this.readyState === 4) {
           if (this.status === 200) {
@@ -149,6 +156,9 @@
                 node.id = item.id;
                 node.text = item.name;
                 categories[categoriesIdx.indexOf(item.parent.id)].children.push(node);
+
+                categorySearch[node.id] = node.text;
+                sessionStorage.setItem("app:categorySearch", JSON.stringify(categorySearch));
               }
             });
             return resolve(categories);
