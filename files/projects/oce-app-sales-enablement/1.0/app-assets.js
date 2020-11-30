@@ -258,15 +258,15 @@
         header.classList.add('text-muted');
         header.textContent = taxonomy.name;
         filterGroup.appendChild(header);
-
-        let treeContainer = document.createElement('div');
-        treeContainer.id = new Object;
-        filterGroup.appendChild(treeContainer);
-    
+      
         //save tree for search
         taxomomies[id] = new Object;
-        sessionStorage.setItem('app:taxonomy', JSON.stringify(taxomomies));
+        taxomomies.setItem('app:taxonomy', JSON.stringify(taxomomies));
 
+        let treeContainer = document.createElement('div');
+        treeContainer.id = id;
+        filterGroup.appendChild(treeContainer);
+    
         getCategories(id).then(function(categories) {
           const myTree = new Tree('#' + id, {
             data: categories,
@@ -277,9 +277,8 @@
             },
           });
 
-          //save tree for search
           taxomomies[id].categories = categories;
-          sessionStorage.setItem('app:taxonomy', JSON.stringify(taxomomies));
+          taxomomies.setItem('app:taxonomy', JSON.stringify(taxomomies));
         })
         .catch((e) => {
           console.error(e);
