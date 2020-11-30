@@ -83,7 +83,7 @@
           //@todo expand regex to synonyms
           var patt = new RegExp(categorySearch[i].text, 'i');
           if (patt.test(word)) {
-            console.debug(`found ${word}`);
+            console.debug(`categorySearch ${word}`);
           } 
         }
       });
@@ -152,6 +152,9 @@
                 node.children = new Array;
                 categories.push(node);
                 categoriesIdx.push(item.id);
+
+                categorySearch.push(node)
+                sessionStorage.setItem("app:categorySearch", JSON.stringify(categorySearch));
               }
               else {
                 categoriesChildren.push(item);
