@@ -4,30 +4,30 @@
   font-family: 'Oracle Sans',-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Arial,sans-serif;
   color: #161513;
 }
-.bg-light {
-  background-color: #f5f4f2 !important;
+.app .bg-light {
+  background-color: #f5f4f2;
 }
-.h5, h5 {
-  font-size: 1rem !important;
+.app .h5, .app h5 {
+  font-size: 1rem;
 }
-.bg-primary {
-  background-color: #594564 !important;
+.app .bg-primary {
+  background-color: #594564;
 }
-.btn-primary {
-  background-color: #594564 !important;
-  border-color: #594564 !important;
+.app .btn-primary {
+  background-color: #594564;
+  border-color: #594564;
 }
-.btn-outline-primary {
-  color: #594564 !important;
-  border-color: #594564 !important;
+.app .btn-outline-primary {
+  color: #594564;
+  border-color: #594564;
 }
-.btn-outline-primary:hover {
+.app .btn-outline-primary:hover {
   color: #fff;
-  background-color: #594564 !important;
-  border-color: #594564 !important;
+  background-color: #594564;
+  border-color: #594564;
 }
-.bg-secondary {
-  background-color: #b7a1c4 !important;
+.app .bg-secondary {
+  background-color: #b7a1c4;
 }
 
 /* utility */
