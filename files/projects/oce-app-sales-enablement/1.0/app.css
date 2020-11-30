@@ -73,10 +73,6 @@
   font-size: 1rem;
   color: #161513;
 }
-.app main {
-  margin-top: 82px;
-  width: 99%;
-}
 .app header::after {
   display: block;
   content: "";
@@ -93,6 +89,14 @@
 }
 .app #search input {
   padding-left: 30px;
+}
+.app main {
+  margin-top: 82px;
+  margin-left: 280px;
+}
+.app aside {
+  margin-top: 82px;
+  width: 280px;
 }
 
 /* cards 16:9 */

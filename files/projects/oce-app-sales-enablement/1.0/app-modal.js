@@ -1,4 +1,4 @@
-/* app-sidebar.js v1.0 */
+/* app-modal.js v1.0 */
 (function (window) {
 
   //promise based asset download
@@ -122,7 +122,7 @@
     item.version = this.getAttribute('data-version');
     if (item.id && item.name && item.mimeType && item.version) {
       showLoader();
-      bootstrap.Modal.getInstance(document.getElementById('sidebar')).hide();
+      bootstrap.Modal.getInstance(document.getElementById('modal')).hide();
 
       getFile(item).then(function(file) {
         //create folder
@@ -204,7 +204,7 @@
   }
 
   //main entry
-  const sidebar = document.getElementById('sidebar');
+  const modal = document.getElementById('modal');
   let html = `
 <div class="modal-dialog" role="document">
   <div class="modal-content">
@@ -218,18 +218,18 @@
     <div class="modal-footer justify-content-start"></div>
   </div>
 </div>`;
-  sidebar.innerHTML = html;
+  modal.innerHTML = html;
 
-  //render asset in sidebar
-  sidebar.addEventListener('show.bs.modal', function (event) {
+  //render asset in modal
+  modal.addEventListener('show.bs.modal', function (event) {
     const card = event.relatedTarget;
     const id = card.getAttribute('data-oce-id');
-    const sidebar = document.getElementById('sidebar');
-    const modalTitle = sidebar.getElementsByClassName('modal-title')[0];
+    const modal = document.getElementById('modal');
+    const modalTitle = modal.getElementsByClassName('modal-title')[0];
     modalTitle.textContent = card.getAttribute('title');
     let item = JSON.parse(sessionStorage.getItem(id));
 
-    const modalBody = sidebar.getElementsByClassName('modal-body')[0];
+    const modalBody = modal.getElementsByClassName('modal-body')[0];
     modalBody.innerHTML = '';
 
     //add preview
@@ -314,7 +314,7 @@
     });
     //`<div class="preview"><iframe class="document-frame" src="/documents/assetview/${id}/1/preview/html5/pvw.html"></iframe></div>`;
 
-    const modalFooter = sidebar.getElementsByClassName('modal-footer')[0];
+    const modalFooter = modal.getElementsByClassName('modal-footer')[0];
     modalFooter.innerHTML = '';
 
     //add copy asset button

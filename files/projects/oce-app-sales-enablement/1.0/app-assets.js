@@ -154,7 +154,7 @@
     card.setAttribute('title', itemName);
     card.setAttribute('data-oce-id', item.id);
     card.setAttribute('data-toggle', 'modal');
-    card.setAttribute('data-target', '#sidebar');
+    card.setAttribute('data-target', '#modal');
 
     let cardTop = document.createElement('img');
     cardTop.classList.add('card-img-top');
