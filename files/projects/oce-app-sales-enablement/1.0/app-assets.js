@@ -80,7 +80,7 @@
       let words = q.split(' ');
       words.forEach(function(word) {
         console.log(word);
-        let found = categorySearch.find(el => el.name === word);
+        let found = categorySearch.find(el => el.text === word);
         if (found) {
           console.log(found);
         }
