@@ -133,7 +133,7 @@
       xhr.send();
 
       let categorySearch = JSON.parse(sessionStorage.getItem("app:categorySearch"));
-      if (!categorySearch.length) {
+      if (!categorySearch) {
         categorySearch = new Array;
       }
 
