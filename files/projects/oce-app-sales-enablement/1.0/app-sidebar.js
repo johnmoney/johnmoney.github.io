@@ -229,7 +229,7 @@
     modalTitle.textContent = card.getAttribute('title');
 
     const modalBody = sidebar.getElementsByClassName('modal-body')[0];
-    modalBody.innerHTML = `<div class="preview"><iframe class="document-frame" src="/documents/assetview/${id}/3/preview/html5/pvw.html"></iframe></div>`;
+    modalBody.innerHTML = `<div class="preview"><iframe class="document-frame" src="/documents/assetview/${id}/1/preview/html5/pvw.html"></iframe></div>`;
 
     let item = JSON.parse(sessionStorage.getItem(id));
 
