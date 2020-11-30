@@ -76,12 +76,8 @@
     //@todo run through stop words
     //@todo extract taxonomies
     if (q) {
-      const taxonomies = sessionStorage.getItem('app:taxonomy');
       let words = q.split(' ');
       words.forEach(function(word) {
-        taxonomies.forEach(function(taxonomy) {
-          if ()
-        }
       });
     }
 
