@@ -207,12 +207,8 @@
 
     let item = JSON.parse(sessionStorage.getItem(id));
 
-    let cardAction = document.createElement('div');
-    cardAction.classList.add('card-text');
-    cardBody.appendChild(cardAction);
-
+    //add footer
     const modalFooter = sidebar.getElementsByClassName('modal-footer')[0];
-
     let button = document.createElement('div');
     button.classList.add('btn');
     button.classList.add('btn-primary');
