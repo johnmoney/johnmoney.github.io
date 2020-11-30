@@ -2,6 +2,13 @@
 (function (window) {
   let selectedCategories = new Object;
 
+  //search
+  function searchSubmit(event) {
+    let q = document.getElementById('search').getElementsByTagName('input')[0].value;
+    console.log('q=' + q);
+    event.preventDefault();
+  }
+
   //promise based content api search published items
   //https://docs.oracle.com/en/cloud/paas/content-cloud/rest-api-content-delivery/op-published-api-v1.1-items-get.html
   function getItems() {
@@ -316,12 +323,7 @@
   renderFilters();
   renderCards();
 
-  //search
-  function logSubmit(event) {
-    console.log(`Form Submitted! Time stamp: ${event.timeStamp}`);
-    event.preventDefault();
-  }
   const search = document.getElementById('search');
-  search.addEventListener('submit', logSubmit);
+  search.addEventListener('submit', searchSubmit);
 
 })(window);
