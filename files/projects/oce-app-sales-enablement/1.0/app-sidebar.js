@@ -1,5 +1,30 @@
 /* app-sidebar.js v1.0 */
 (function (window) {
+
+  //promise based asset download
+  function getFile(item) {
+    return new Promise((resolve, reject) => {
+      const uri = `${config.api.content}/assets/${item.id}/native?channelToken=${config.channelToken}`;
+      let xhr = new XMLHttpRequest();
+
+      xhr.open('GET', uri, true);
+      xhr.responseType = 'arraybuffer';
+      xhr.send();
+
+      xhr.onreadystatechange = function() {
+        if (this.readyState === 4) {
+          if (this.status === 200) {
+            var file = new File([this.response], 'Copy of ' + item.name, {type: item.mimeType});
+            return resolve(file);
+          } else {
+            return reject({ status: this.status, text: this.statusText })
+          }
+        }
+      };
+      xhr.onerror = reject
+    });
+  }
+
   //promise based documents api file upload
   //https://docs.oracle.com/en/cloud/paas/content-cloud/rest-api-documents/op-documents-api-1.2-files-data-post.html
   function uploadFile(file) {
@@ -98,6 +123,10 @@
     if (item.id && item.name && item.mimeType && item.version) {
       showLoader();
 
+      let sidebar = document.getElementById('sidebar');
+      var modal = bootstrap.Modal.getInstance(sidebar) // Returns a Bootstrap modal instance
+      modal.hide()
+
       getFile(item).then(function(file) {
         //create folder
 
@@ -189,7 +218,7 @@
       </button>
     </div>
     <div class="modal-body"></div>
-    <div class="modal-footer"></div>
+    <div class="modal-footer justify-content-start"></div>
   </div>
 </div>`;
   sidebar.innerHTML = html;
@@ -212,7 +241,6 @@
     let button = document.createElement('div');
     button.classList.add('btn');
     button.classList.add('btn-primary');
-    button.classList.add('btn-sm');
     button.innerHTML = '<i class="fa fa-cloud-download mr-2" aria-hidden="true"></i>Checkout asset';
     button.setAttribute('name', item.name);
     button.setAttribute('data-oce-id', item.id);

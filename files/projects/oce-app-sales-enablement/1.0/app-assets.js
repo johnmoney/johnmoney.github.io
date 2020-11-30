@@ -67,30 +67,6 @@
     });
   }
 
-  //promise based asset download
-  function getFile(item) {
-    return new Promise((resolve, reject) => {
-      const uri = `${config.api.content}/assets/${item.id}/native?channelToken=${config.channelToken}`;
-      let xhr = new XMLHttpRequest();
-
-      xhr.open('GET', uri, true);
-      xhr.responseType = 'arraybuffer';
-      xhr.send();
-
-      xhr.onreadystatechange = function() {
-        if (this.readyState === 4) {
-          if (this.status === 200) {
-            var file = new File([this.response], 'Copy of ' + item.name, {type: item.mimeType});
-            return resolve(file);
-          } else {
-            return reject({ status: this.status, text: this.statusText })
-          }
-        }
-      };
-      xhr.onerror = reject
-    });
-  }
-
   //promise based content api search categories
   //https://docs.oracle.com/en/cloud/paas/content-cloud/rest-api-content-delivery/op-published-api-v1.1-taxonomies-id-get.html
   function getTaxonomy(id) {
