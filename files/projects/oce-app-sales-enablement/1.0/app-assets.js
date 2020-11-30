@@ -81,7 +81,7 @@
       words.forEach(function(word) {
         for (var i = 0; i < categorySearch.length; i++) {
           //@todo expand regex to synonyms
-          var patt = new RegExp(categorySearch[i].text);
+          var patt = new RegExp(categorySearch[i].text, 'i');
           if (patt.test(word)) {
             console.debug(`found ${word}`);
           } 
