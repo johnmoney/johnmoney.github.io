@@ -31,7 +31,7 @@
       let searchQueryString = searchQuery ? `&default="${searchQuery}"` : '';
 
       let uri = `${config.api.content}/items?q=(type eq "DigitalAsset"${taxonomyQueryString})${searchQueryString}&fields=all&channelToken=${config.channelToken}`;
-      let queryHash = 'query:' + hash(uri) + ':' + getRoundedDate(config.api.cacheMinutes);
+      let queryHash = 'app:query:' + hash(uri) + ':' + getRoundedDate(config.api.cacheMinutes);
       let items = JSON.parse(sessionStorage.getItem(queryHash));
       if (items) {
         return resolve(items);
@@ -74,7 +74,6 @@
     let q = document.getElementById('search').getElementsByTagName('input')[0].value;
     //@todo run through stop words
     //@todo extract taxonomies
-    console.log('q=' + q);
     searchQuery = q;
     renderCards();
 
@@ -246,6 +245,7 @@
 
   function renderFilters() {
     const filters = document.getElementById('filters');
+    let taxomomies = new Object;
 
     config.assets.filterTaxonomies.forEach(function(id, idx) {
       getTaxonomy(id).then(function(taxonomy) {
@@ -258,7 +258,11 @@
         header.classList.add('text-muted');
         header.textContent = taxonomy.name;
         filterGroup.appendChild(header);
-      
+
+        //save tree for search
+        taxomomies.id = new Object;
+        sessionStorage.setItem('app:taxonomy', JSON.stringify(taxomomies));
+
         let treeContainer = document.createElement('div');
         treeContainer.id = id;
         filterGroup.appendChild(treeContainer);
@@ -272,6 +276,10 @@
               renderCards();
             },
           });
+
+          //save tree for search
+          taxomomies.id.categories = categories;
+          sessionStorage.setItem('app:taxonomy', JSON.stringify(taxomomies));
         })
         .catch((e) => {
           console.error(e);
