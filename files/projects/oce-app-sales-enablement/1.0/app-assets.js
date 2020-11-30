@@ -124,10 +124,7 @@
       xhr.setRequestHeader('Content-Type', 'application/json');
       xhr.send();
 
-      let categorySearch = sessionStorage.getItem("app:categorySearch");
-      if (!categorySearch) {
-        categorySearch = new Object;
-      }
+      let categorySearch = JSON.parse(sessionStorage.getItem("app:categorySearch"));
 
       xhr.onreadystatechange = function() {
         if (this.readyState === 4) {
