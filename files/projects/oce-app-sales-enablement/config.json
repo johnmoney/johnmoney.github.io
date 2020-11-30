@@ -13,6 +13,7 @@
   
   },
   "api": {
+    "url": "https://demodev-oce0001.cec.ocp.oraclecloud.com",
     "documents": "/pxysvc/proxy/documents",
     "content": "/content/published/api/v1.1",
     "cacheMinutes": 1

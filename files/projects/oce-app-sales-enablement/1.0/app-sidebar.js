@@ -227,19 +227,100 @@
     const sidebar = document.getElementById('sidebar');
     const modalTitle = sidebar.getElementsByClassName('modal-title')[0];
     modalTitle.textContent = card.getAttribute('title');
+    let item = JSON.parse(sessionStorage.getItem(id));
+    console.log(item);
 
     const modalBody = sidebar.getElementsByClassName('modal-body')[0];
-    modalBody.innerHTML = `<div class="preview"><iframe class="document-frame" src="/documents/assetview/${id}/1/preview/html5/pvw.html"></iframe></div>`;
+    modalBody.innerHTML = '';
 
-    let item = JSON.parse(sessionStorage.getItem(id));
+    //add preview
+    let preview = document.createElement('div');
+    preview.classList.add('preview');
+    modalBody.appendChild(preview);
+    OracleCEUI.ssoInit().then(function() {
+      var options = {
+        "component": "assetViewer",
+        "id": "EMBED_UI",
+        "name": "Embed UI",
+        "scheme": "default",
+        "takeFocus": false,
+        "assetViewer": {
+          "header": {
+            "hide": true,
+            "create": false,
+            "annotate": false,
+            "fullScreen": false,
+            "close": false,
+            "save": false
+          },
+          "actions": {
+            "open": false,
+            "edit": false,
+            "download": false,
+            "uploadNewVersion": false,
+            "makeCurrent": false,
+            "compare": false,
+            "preview": false
+          },
+          "fields": {
+            "display": false,
+            "expand": false
+          },
+          "controls": {
+            "fit": "default",
+            "zoom": true,
+            "fitOriginal": true,
+            "fitPage": true,
+            "fitWidth": true
+          },
+          "thumbnails": {
+            "hide": false,
+            "expand": true
+          },
+          "sidebar": {
+            "expand": false,
+            "analytics": false,
+            "categories": false,
+            "channels": false,
+            "conversation": false,
+            "inventory": false,
+            "properties": false,
+            "renditions": false,
+            "tagsAndCollections": false,
+            "translations": false,
+            "workflow": false,
+            "options": {}
+          },
+          "videoControls": {
+            "hide": false,
+            "autoplay": false,
+            "loop": false,
+            "mute": false
+          },
+          "views": {},
+          "id": id,
+          "version": "1"
+        },
+        "v1": {
+          "show_branding": false,
+          "show_navmenu": false,
+          "show_findbar": false,
+          "hide_search": true
+        }
+      };
+      var frameElement = OracleCEUI.assetsView.createFrame(options, events);
+      preview.appendChild.(frameElement);
+    });
+    //`<div class="preview"><iframe class="document-frame" src="/documents/assetview/${id}/1/preview/html5/pvw.html"></iframe></div>`;
 
-    //add footer
     const modalFooter = sidebar.getElementsByClassName('modal-footer')[0];
     modalFooter.innerHTML = '';
+
+    //add copy asset button
     let button = document.createElement('div');
     button.classList.add('btn');
     button.classList.add('btn-primary');
-    button.innerHTML = '<i class="fa fa-cloud-download mr-2" aria-hidden="true"></i>Checkout asset';
+    button.innerHTML = '<i class="fa fa-cloud-download mr-2" aria-hidden="true"></i>Copy asset';
     button.setAttribute('name', item.name);
     button.setAttribute('data-oce-id', item.id);
     button.setAttribute('data-mimetype', item.fields.mimeType);
