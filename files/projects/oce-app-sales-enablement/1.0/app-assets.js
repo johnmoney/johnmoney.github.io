@@ -1,15 +1,5 @@
 /* app-assets.js v1.0 */
 (function (window) {
-  /* Config *******************************/
-  const contentUri = '/content/published/api/v1.1';
-  const documentsUri = '/pxysvc/proxy/documents';
-  const folderId =      'FAFC0430B0461318672BB0ECB4507B76ADA285099EDC';
-  const documentCollection = 'Sales Enablement';
-  const documentSourceField = 'Source';
-  const documentSourceVersionField = 'Source version';
-  const queryCache = 1; //minutes
-  /****************************************/
-
   let selectedCategories = new Object;
 
   //promise based content api search published items
@@ -38,8 +28,8 @@
         taxonomyQueryString = ' AND (' + taxonomyQuery.join(' AND ') + ')';
       }
 
-      let uri = `${contentUri}/items?q=(type eq "DigitalAsset"${taxonomyQueryString})&fields=all&channelToken=${config.channelToken}`;
-      let queryHash = 'query:' + hash(uri) + ':' + getRoundedDate(queryCache);
+      let uri = `${config.api.content}/items?q=(type eq "DigitalAsset"${taxonomyQueryString})&fields=all&channelToken=${config.channelToken}`;
+      let queryHash = 'query:' + hash(uri) + ':' + getRoundedDate(config.api.cacheMinutes);
       let items = JSON.parse(sessionStorage.getItem(queryHash));
       if (items) {
         return resolve(items);
@@ -80,7 +70,7 @@
   //promise based asset download
   function getFile(item) {
     return new Promise((resolve, reject) => {
-      const uri = `${contentUri}/assets/${item.id}/native?channelToken=${config.channelToken}`;
+      const uri = `${config.api.content}/assets/${item.id}/native?channelToken=${config.channelToken}`;
       let xhr = new XMLHttpRequest();
 
       xhr.open('GET', uri, true);
@@ -101,99 +91,11 @@
     });
   }
 
-  //promise based documents api file upload
-  //https://docs.oracle.com/en/cloud/paas/content-cloud/rest-api-documents/op-documents-api-1.2-files-data-post.html
-  function uploadFile(file) {
-    return new Promise((resolve, reject) => {
-      const uri = `${documentsUri}/files/data`;
-      let xhr = new XMLHttpRequest();
-      let fd = new FormData();
-
-      xhr.open('POST', uri, true);
-      fd.append('jsonInputParameters', '{"parentID":"' + folderId + '"}');
-      fd.append('primaryFile', file);
-      xhr.send(fd);
-
-      xhr.onreadystatechange = function() {
-        if (this.readyState === 4) {
-          if (this.status === 201) {
-              const json = JSON.parse(xhr.response);
-              return resolve(json.id);
-          } else {
-              return reject({ status: this.status, text: xhr.statusText })
-          }
-        }
-      };
-      xhr.onerror = reject
-    });
-  }
-
-  //promise based documents api file upload
-  //https://docs.oracle.com/en/cloud/paas/content-cloud/rest-api-documents/op-documents-api-1.2-files-fileid-metadata-collectionname-post.html
-  function addFileCollection(fileId) {
-    return new Promise((resolve, reject) => {
-      const uri = `${documentsUri}/files/${fileId}/metadata/${documentCollection}`;
-      let xhr = new XMLHttpRequest();
-      xhr.open('POST', uri, true);
-      xhr.send();
-
-      xhr.onreadystatechange = function() {
-        if (this.readyState === 4) {
-          if (this.status === 200) {
-              const json = JSON.parse(xhr.response);
-              if (json.errorCode == "0") {
-                return resolve(json);
-              }
-              else {
-                return reject({ status: 400, text: json.errorMessage })
-              }
-          } else {
-              return reject({ status: this.status, text: xhr.statusText })
-          }
-        }
-      };
-      xhr.onerror = reject
-    });
-  }
-
-  //promise based documents api file upload
-  //https://docs.oracle.com/en/cloud/paas/content-cloud/rest-api-documents/op-documents-api-1.2-files-fileid-metadata-post.html
-  function setFileCollection(fileId, item) {
-    return new Promise((resolve, reject) => {
-      const uri = `${documentsUri}/files/${fileId}/metadata`;
-      let xhr = new XMLHttpRequest();
-      let params = new Object;
-      params.collection = documentCollection;
-      params[documentSourceField] = item.id;
-      params[documentSourceVersionField] = item.version;
-
-      xhr.open('POST', uri, true);
-      xhr.send(JSON.stringify(params));
-
-      xhr.onreadystatechange = function() {
-        if (this.readyState === 4) {
-          if (this.status === 200) {
-            const json = JSON.parse(xhr.response);
-            if (json.errorCode == "0") {
-              return resolve(json);
-            }
-            else {
-              return reject({ status: 400, text: json.errorMessage })
-            }
-          } else {
-              return reject({ status: this.status, text: xhr.statusText })
-          }
-        }
-      };
-      xhr.onerror = reject
-    });
-  }
-
   //promise based content api search categories
   //https://docs.oracle.com/en/cloud/paas/content-cloud/rest-api-content-delivery/op-published-api-v1.1-taxonomies-id-get.html
   function getTaxonomy(id) {
     return new Promise((resolve, reject) => {
-      let uri = `${contentUri}/taxonomies/${id}?channelToken=${config.channelToken}`;
+      let uri = `${config.api.content}/taxonomies/${id}?channelToken=${config.channelToken}`;
       let xhr = new XMLHttpRequest();
 
       xhr.open('GET', uri, true);
@@ -218,7 +120,7 @@
   //https://docs.oracle.com/en/cloud/paas/content-cloud/rest-api-content-delivery/op-published-api-v1.1-taxonomies-id-categories-get.html
   function getCategories(id) {
     return new Promise((resolve, reject) => {
-      let uri = `${contentUri}/taxonomies/${id}/categories?limit=9999&orderBy=position:asc&fields=all&channelToken=${config.channelToken}`;
+      let uri = `${config.api.content}/taxonomies/${id}/categories?limit=9999&orderBy=position:asc&fields=all&channelToken=${config.channelToken}`;
       let xhr = new XMLHttpRequest();
 
       xhr.open('GET', uri, true);
@@ -300,76 +202,13 @@
     cardText.classList.add('flex-grow-1');
     cardBody.appendChild(cardText);
 
-    let cardAction = document.createElement('div');
-    cardAction.classList.add('card-text');
-    cardBody.appendChild(cardAction);
-
-    let button = document.createElement('div');
-    button.classList.add('btn');
-    button.classList.add('btn-primary');
-    button.classList.add('btn-sm');
-    button.innerHTML = '<i class="fa fa-cloud-download mr-2" aria-hidden="true"></i>Checkout asset';
-    button.setAttribute('name', item.name);
-    button.setAttribute('data-oce-id', item.id);
-    button.setAttribute('data-mimetype', item.fields.mimeType);
-    button.setAttribute('data-version', item.fields.version);
-    cardAction.appendChild(button);
-    button.addEventListener("click", copyAssetButton);
-
     let cardFooter = document.createElement('div');
     cardFooter.classList.add('card-footer');
     cardFooter.classList.add('text-muted');
     cardFooter.innerHTML = `Updated <span class="timeago" datetime="${item.updatedDate.value}">${item.updatedDate.value}</span>`;
     card.appendChild(cardFooter);
 
-//    card.addEventListener("click", renderAsset);
     return card;
-  }
-
-  //copy asset button
-  function copyAssetButton() {
-    let item = new Object;
-    item.id = this.getAttribute('data-oce-id');
-    item.name = this.getAttribute('name');
-    item.mimeType = this.getAttribute('data-mimetype');
-    item.version = this.getAttribute('data-version');
-    if (item.id && item.name && item.mimeType && item.version) {
-      showLoader();
-
-      getFile(item).then(function(file) {
-        //create folder
-
-        uploadFile(file).then(function(fileId) {
-          addFileCollection(fileId).then(function(response) {
-            setFileCollection(fileId, item).then(function(response) {
-              //show success
-              showLoader(false);
-              createAlert(`${item.name} copied to your Documents. <a target="_blank" href="/documents/fileview/${fileId}">View document</a>`, 'success', 'files-o')
-            })
-            .catch((e) => {
-              console.error(e);
-              showLoader(false);
-              createAlert('An error has occurred setting metadata on the asset.', 'danger');
-            });
-          })
-          .catch((e) => {
-            console.error(e);
-            showLoader(false);
-            createAlert('An error has occurred setting metadata on the asset.', 'danger');
-          });
-        })
-        .catch((e) => {
-          console.error(e);
-          showLoader(false);
-          createAlert('An error has occurred copying the asset.', 'danger');
-        });
-      })
-      .catch((e) => {
-        console.error(e);
-        showLoader(false);
-        createAlert('An error has occurred copying the asset.', 'danger');
-      });
-    }
   }
 
   //create Bootstrap alert

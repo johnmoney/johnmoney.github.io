@@ -4,5 +4,17 @@
   "assets": {
     "validMimeTypes" : ["application/vnd.ms-powerpoint", "application/vnd.openxmlformats-officedocument.presentationml.presentation", "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "application/pdf"],
     "filterTaxonomies" : ["E29AD592DC2A444B99D88CDDBFC13C96", "B965F44143D043739D6480AEBC208962", "EF3FE32A8506461490477A32232C4344"]
+  },
+  "documents": {
+    "parentFolderId": "FAFC0430B0461318672BB0ECB4507B76ADA285099EDC",
+    "collection": "Sales Enablement",
+    "sourceField": "Source",
+    "sourceVersionField": "Source version"
+  
+  },
+  "api": {
+    "documents": "/pxysvc/proxy/documents",
+    "content": "/content/published/api/v1.1",
+    "cacheMinutes": 1
   }
 }
