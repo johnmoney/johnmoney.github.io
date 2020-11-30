@@ -152,13 +152,16 @@
                 node.children = new Array;
                 categories.push(node);
                 categoriesIdx.push(item.id);
-
-                categorySearch.push(node)
-                sessionStorage.setItem("app:categorySearch", JSON.stringify(categorySearch));
               }
               else {
                 categoriesChildren.push(item);
               }
+
+              let searchIndex = new Object;
+              searchIndex.id = item.id;
+              searchIndex.text = item.name;
+              categorySearch.push(searchIndex)
+              sessionStorage.setItem("app:categorySearch", JSON.stringify(categorySearch));
             });
             categoriesChildren.forEach(function(item) {
               if (categoriesIdx.indexOf(item.parent.id) != -1) {
@@ -166,9 +169,6 @@
                 node.id = item.id;
                 node.text = item.name;
                 categories[categoriesIdx.indexOf(item.parent.id)].children.push(node);
-
-                categorySearch.push(node)
-                sessionStorage.setItem("app:categorySearch", JSON.stringify(categorySearch));
               }
             });
             return resolve(categories);
