@@ -46,7 +46,7 @@
 
     let cardTop = document.createElement('img');
     cardTop.classList.add('card-img-top');
-    cardTop.src = `/documents/web?IdcService=GET_THUMBNAIL&item=arCaaSGUID:${item.id}&arCaaSVersion=1&timeStamp=1605921816141`;
+    cardTop.src = `/documents/web?IdcService=GET_THUMBNAIL&item=fFileGUID:${item.id}&arCaaSVersion=1&timeStamp=1605921816141`;
     card.appendChild(cardTop);
 
     let cardBody = document.createElement('div');
