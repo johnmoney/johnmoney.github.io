@@ -5,6 +5,7 @@
   //https://docs.oracle.com/en/cloud/paas/content-cloud/rest-api-documents/op-documents-api-1.2-folders-search-items-get.html
   function searchFiles() {
     return new Promise((resolve, reject) => {
+      
       const uri = `${config.api.documents}/folders/${config.documents.parentFolderId}/search/items?querytext=fOwner<MATCHES>"14001"&fields=metadata`;
       let xhr = new XMLHttpRequest();
 
