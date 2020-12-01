@@ -11,7 +11,7 @@
       const hash = s => s.split('').reduce((a,b)=>{a=((a<<5)-a)+b.charCodeAt(0);return a&a},0);
       let getRoundedDate = (minutes) => {
         let ms = 1000 * 60 * minutes;
-        let roundedDate = new Date(Math.round(now.getTime() / ms) * ms);
+        let roundedDate = new Date(Math.ceil(now.getTime() / ms) * ms);
         return roundedDate
       }
 
