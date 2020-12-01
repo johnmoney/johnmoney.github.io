@@ -118,6 +118,6 @@
     createAlert('An error has occurred loading account.', 'danger');
   });
 
-  document.getElementById('documents-menu').addEventListener('click', renderMyDocuments);
+  document.getElementById('documents-menu').addEventListener('click', renderDocuments);
 
 })(window);
