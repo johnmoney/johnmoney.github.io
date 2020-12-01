@@ -46,9 +46,8 @@
                 if (item.type == 'file') {
                   items.push(item);
                 }
-              }).then(() => {
-                return resolve(items);
               });
+              return resolve(items);
             } else {
               return reject({ status: this.status, text: this.statusText })
             }
@@ -64,17 +63,21 @@
 
   //promise based wrapper function
   function getFilesExtended() {
-    return new Promise((resolve, reject) => {
-      let files = [];
-      getFiles().then(function(items) {
-        items.forEach(function(item) {
-          getFileMetadata(item.id).then(function(metadata) {
-            item.metadata = metadata;
-            files.push(item);
-          });
-          return resolve(files);
+    let files = [];
+    let promises = [];
+    getFiles().then(function(items) {
+      items.forEach(function(item) {
+        let p = getFileMetadata(item.id).then(function(metadata) {
+          item.metadata = metadata;
+          files.push(item);
         });
+        promises.push(p);
       });
+      return Promise.all(promises);
+    }).then(() => {
+      return files;
+    }).catch((error) => {
+        // process error here
     });
   }
 
