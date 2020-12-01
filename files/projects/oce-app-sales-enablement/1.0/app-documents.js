@@ -7,9 +7,9 @@
     return new Promise((resolve, reject) => {
       let account = JSON.parse(sessionStorage.getItem('account'));
       if (account) {
+        console.info('%cquery: ' + uri, 'color: #0099ff;');
         const uri = `${config.api.documents}/files/${fileId}/metadata`;
         let xhr = new XMLHttpRequest();
-  
         xhr.open('GET', uri, true);
         xhr.send();
   
@@ -38,8 +38,8 @@
       let account = JSON.parse(sessionStorage.getItem('account'));
       if (account) {
         const uri = `${config.api.documents}/folders/${config.documents.parentFolderId}/search/items?querytext=fOwnerLoginName<MATCHES>%60${account.email}%60&fields=metadata&orderby=lastModifiedDate:desc`;
+        console.info('%cquery: ' + uri, 'color: #0099ff;');
         let xhr = new XMLHttpRequest();
-  
         xhr.open('GET', uri, true);
         xhr.send();
   
