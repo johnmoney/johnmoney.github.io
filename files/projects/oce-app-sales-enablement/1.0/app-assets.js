@@ -74,10 +74,11 @@
     let q = document.getElementById('search').getElementsByTagName('input')[0].value;
     let categorySearch = JSON.parse(sessionStorage.getItem("app:categorySearch"));
 
-    //@todo run through stop words
-    //@todo extract taxonomies
     if (q) {
+      /*
       let words = q.split(' ');
+      //@todo run through stop words
+      //@todo extract taxonomies
       words.forEach(function(word) {
         for (var i = 0; i < categorySearch.length; i++) {
           //@todo expand regex to synonyms
@@ -87,8 +88,8 @@
           } 
         }
       });
+      */
     }
-
 
     searchQuery = q;
     renderCards();
@@ -131,7 +132,7 @@
       xhr.open('GET', uri, true);
       xhr.setRequestHeader('Content-Type', 'application/json');
       xhr.send();
-
+      
       xhr.onreadystatechange = function() {
         if (this.readyState === 4) {
           if (this.status === 200) {
@@ -153,9 +154,6 @@
               }
 
               let categorySearch = JSON.parse(sessionStorage.getItem("app:categorySearch"));
-              if (!categorySearch) {
-                categorySearch = new Array;
-              }        
               let searchIndex = new Object;
               searchIndex.id = item.id;
               searchIndex.text = item.name;
@@ -271,6 +269,9 @@
 
   function renderFilters() {
     const filters = document.getElementById('filters');
+
+    //initialize categorySearch
+    sessionStorage.setItem("app:categorySearch", JSON.stringify([]));
 
     config.assets.filterTaxonomies.forEach(function(id, idx) {
       getTaxonomy(id).then(function(taxonomy) {
