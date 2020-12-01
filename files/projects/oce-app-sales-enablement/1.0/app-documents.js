@@ -7,7 +7,7 @@
     return new Promise((resolve, reject) => {
       let account = JSON.parse(sessionStorage.getItem('account'));
       if (account) {
-        const uri = `${config.api.documents}/folders/${config.documents.parentFolderId}/search/items?querytext=fOwnerLoginName<MATCHES>%60${account.email}%60&fields=metadata`;
+        const uri = `${config.api.documents}/folders/${config.documents.parentFolderId}/search/items?querytext=fOwnerLoginName<MATCHES>%60${account.email}%60&fields=metadata&orderby=lastModifiedDate:desc`;
         let xhr = new XMLHttpRequest();
   
         xhr.open('GET', uri, true);
@@ -16,8 +16,14 @@
         xhr.onreadystatechange = function() {
           if (this.readyState === 4) {
             if (this.status === 200) {
-              console.log(this.response);
-              return resolve(this.response);
+              const json = JSON.parse(this.response);
+              let items = [];
+              json.items.forEach(function(item) {
+                if (item.type == 'file') {
+                  items.push(item);
+                }
+              }
+              return resolve(items);
             } else {
               return reject({ status: this.status, text: this.statusText })
             }
@@ -39,7 +45,7 @@
     const modalBody = modal.getElementsByClassName('modal-body')[0];
     modalBody.innerHTML = '';
 
-    searchFiles().then(function(response) {
+    searchFiles().then(function(items) {
     });
 
     const modalFooter = modal.getElementsByClassName('modal-footer')[0];
