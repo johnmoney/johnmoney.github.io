@@ -80,6 +80,7 @@
           console.log(files);
           return resolve(files);
         });
+      });
     });
   }
 
