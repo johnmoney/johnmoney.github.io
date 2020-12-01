@@ -87,6 +87,10 @@
     });
   }
 
+  function renderMyDocuments() {
+    console.log("renderMyDocuments");
+  }
+
   //main entry
   getAccount().then(function(account) {
     const accountMenu = document.getElementById('accountMenu');
@@ -110,5 +114,7 @@
     console.error(e);
     createAlert('An error has occurred loading account.', 'danger');
   });
+
+  document.getElementById('myDocuments').addEventListener('click', renderMyDocuments);
 
 })(window);
