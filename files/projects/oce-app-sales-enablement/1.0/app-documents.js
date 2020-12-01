@@ -77,13 +77,11 @@
             item.metadata = metadata;
             files.push(item);
           });
-          console.log(files);
           return resolve(files);
         });
       });
     });
   }
-
 
   function renderCard(item) {
     //console.debug(item);
@@ -135,6 +133,7 @@
 
     showLoader();
     getFilesExtended().then(function(files) {
+      console.log(files);
       if (files.length) {
         //add cards-deck div
         let cards = document.createElement("div");
@@ -150,7 +149,8 @@
         timeago().render(document.querySelectorAll('.timeago'));
       }
       else {
-//        renderNoResults();
+        createAlert('No documents', 'warning');
+        //        renderNoResults();
       }
 
       showLoader(false);
@@ -158,7 +158,7 @@
     .catch((e) => {
       console.error(e);
       showLoader(false);
-//      createAlert('An error has occurred loading documents.', 'danger');
+      createAlert('An error has occurred loading documents.', 'danger');
     });
 
     const modalFooter = modal.getElementsByClassName('modal-footer')[0];
@@ -173,10 +173,39 @@
       modalBody.innerHTML = '<div id="modal-loader" class="container"><div class="row my-5"><div class="col-8 mx-auto text-center"><div class="pt-4 overflow-hidden"><div class="ball-pulse"><div></div><div></div><div></div></div></div></div></div></div>';
     }
     else {
-      const loader = document.getElementById('modal-loader');
-      loader.classList.add('d-none');
+      document.getElementById('modal-loader').classList.add('d-none');
     }
   }
+
+  //create Bootstrap alert
+  function createAlert(html, type = 'success', icon = '') {
+    const alerts = document.getElementById('alerts');
+    let alert = document.createElement('div');
+    alert.classList.add('alert');
+    alert.classList.add('alert-' + type);
+    alert.classList.add('alert-dismissible');
+    alert.classList.add('fade');
+    alert.classList.add('show');
+    alert.setAttribute('role', 'alert');
+
+    if (!icon) {
+      switch (type) {
+        case 'warning':
+          icon = 'exclamation-triangle'; break;
+        case 'danger':
+          icon = 'bug'; break;
+        case 'info':
+          icon = 'info-circle'; break;
+          default:
+          icon = 'check-circle-o';
+      }
+    }
+    const iconHTML = `<i class="fa fa-${icon} mr-2" aria-hidden="true"></i>`;
+
+    alert.innerHTML = iconHTML + html + '<button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>';
+    alerts.appendChild(alert);
+  }
+
 
   //main entry
   document.getElementById('documents-menu').addEventListener('click', renderDocuments);
