@@ -22,7 +22,7 @@
                 if (item.type == 'file') {
                   items.push(item);
                 }
-              }
+              });
               return resolve(items);
             } else {
               return reject({ status: this.status, text: this.statusText })
