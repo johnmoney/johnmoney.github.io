@@ -87,8 +87,11 @@
     });
   }
 
-  function renderMyDocuments() {
-    console.log("renderMyDocuments");
+  function renderDocuments() {
+    const results = document.getElementById('results');
+    const documents = document.getElementById('documents');
+    results.classList.add('d-none');
+    documents.classList.remove('d-none');
   }
 
   //main entry
@@ -115,6 +118,6 @@
     createAlert('An error has occurred loading account.', 'danger');
   });
 
-  document.getElementById('myDocuments').addEventListener('click', renderMyDocuments);
+  document.getElementById('documents-menu').addEventListener('click', renderMyDocuments);
 
 })(window);
