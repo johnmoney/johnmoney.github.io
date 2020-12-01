@@ -11,6 +11,7 @@
       let getRoundedDate = (minutes, d=new Date()) => {
         let ms = 1000 * 60 * minutes;
         let roundedDate = new Date(Math.round(d.getTime() / ms) * ms);
+        console.log(roundedDate);
         return roundedDate
       }
 
