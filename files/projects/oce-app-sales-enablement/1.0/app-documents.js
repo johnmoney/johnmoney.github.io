@@ -17,8 +17,7 @@
           if (this.readyState === 4) {
             if (this.status === 200) {
               const json = JSON.parse(this.response);
-              console.log(json);
-              return resolve(json);
+              return resolve(json.metadata);
             } else {
               return reject({ status: this.status, text: this.statusText })
             }
@@ -51,10 +50,7 @@
               let items = [];
               json.items.forEach(function(item) {
                 if (item.type == 'file') {
-                  //@todo metadata not returned in parent query
-                  getFileMetadata(item.id).then(function(response) {
-                    items.push(item);
-                  });
+                  items.push(item);
                 }
               });
               return resolve(items);
@@ -70,6 +66,23 @@
       }
     });
   }
+
+  //promise based wrapper function
+  function getFilesExtended() {
+    return new Promise((resolve, reject) => {
+      let files = [];
+      getFiles().then(function(items) {
+        items.forEach(function(item) {
+          getFileMetadata(item.id).then(function(metadata) {
+            item.metadata = metadata;
+            files.push(item);
+          });
+          console.log(files);
+          return resolve(files);
+        });
+    });
+  }
+
 
   function renderCard(item) {
     //console.debug(item);
@@ -120,8 +133,8 @@
     modalBody.innerHTML = '';
 
     showLoader();
-    getFiles().then(function(items) {
-      if (items.length) {
+    getFilesExtended().then(function(files) {
+      if (files.length) {
         //add cards-deck div
         let cards = document.createElement("div");
         cards.classList.add('d-flex');
@@ -129,7 +142,7 @@
         modalBody.appendChild(cards);
 
         //add cards
-        let nodes = items.map(renderCard);
+        let nodes = files.map(renderCard);
         cards.append(...nodes);
 
         //update timeago
