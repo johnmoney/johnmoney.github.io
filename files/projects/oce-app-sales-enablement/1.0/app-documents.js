@@ -83,8 +83,7 @@
     const modalBody = modal.getElementsByClassName('modal-body')[0];
     modalBody.innerHTML = '';
 
-
-//    showLoader();
+    showLoader();
     getFiles().then(function(items) {
       if (items.length) {
         //add cards-deck div
@@ -108,12 +107,25 @@
     })
     .catch((e) => {
       console.error(e);
-//      showLoader(false);
+      showLoader(false);
 //      createAlert('An error has occurred loading documents.', 'danger');
     });
 
     const modalFooter = modal.getElementsByClassName('modal-footer')[0];
     modalFooter.innerHTML = '';
+  }
+
+  //toggle loader and main sections
+  function showLoader(showLoader = true) {
+    if (showLoader) {
+      const modal = document.getElementById('modal');
+      const modalBody = modal.getElementsByClassName('modal-body')[0];
+      modalBody.innerHTML = '<div id="modal-loader" class="container"><div class="row my-5"><div class="col-8 mx-auto text-center"><div class="pt-4 overflow-hidden"><div class="ball-pulse"><div></div><div></div><div></div></div></div></div></div></div>';
+    }
+    else {
+      const loader = document.getElementById('modal-loader');
+      loader.classList.add('d-none');
+    }
   }
 
   //main entry
