@@ -34,7 +34,7 @@
       let uri = `${config.api.content}/items?q=(type eq "DigitalAsset"${taxonomyQueryString})${searchQueryString}&fields=all&channelToken=${config.channelToken}`;
       let queryHash = 'app:query:' + hash(uri);
       let cache = JSON.parse(sessionStorage.getItem(queryHash));
-      if (cache && cache.date < now) {
+      if (cache && new Date(cache.date) < now) {
         return resolve(cache.items);
       }
       else {
