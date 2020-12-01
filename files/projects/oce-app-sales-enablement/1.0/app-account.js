@@ -88,10 +88,15 @@
   }
 
   function renderDocuments() {
-    const results = document.getElementById('results');
-    const documents = document.getElementById('documents');
-    results.classList.add('d-none');
-    documents.classList.remove('d-none');
+    const modal = document.getElementById('modal');
+    const modalTitle = modal.getElementsByClassName('modal-title')[0];
+    modalTitle.textContent = 'My Documents';
+
+    const modalBody = modal.getElementsByClassName('modal-body')[0];
+    modalBody.innerHTML = '';
+
+    const modalFooter = modal.getElementsByClassName('modal-footer')[0];
+    modalFooter.innerHTML = '';
   }
 
   //main entry
