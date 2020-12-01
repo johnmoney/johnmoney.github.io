@@ -39,10 +39,12 @@
 
   function renderCard(item) {
     //console.debug(item);
-    let card = document.createElement('div');
+    let card = document.createElement('a');
     card.classList.add('card');
     card.classList.add('mr-3');
     card.classList.add('mb-3');
+    card.setAttribute('href', `/documents/fileview/${item.id}`);
+    card.setAttribute('target', "_blank");
 
     let cardTop = document.createElement('img');
     cardTop.classList.add('card-img-top');
