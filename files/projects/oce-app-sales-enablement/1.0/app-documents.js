@@ -2,6 +2,37 @@
 (function (window) {
 
   //promise based documents api file search
+  //https://docs.oracle.com/en/cloud/paas/content-cloud/rest-api-documents/op-documents-api-1.2-files-fileid-metadata-get.html
+  function getFileMetadata(fileId) {
+    return new Promise((resolve, reject) => {
+      let account = JSON.parse(sessionStorage.getItem('account'));
+      if (account) {
+        const uri = `${config.api.documents}/files/${fileId}/metadata`;
+        let xhr = new XMLHttpRequest();
+  
+        xhr.open('GET', uri, true);
+        xhr.send();
+  
+        xhr.onreadystatechange = function() {
+          if (this.readyState === 4) {
+            if (this.status === 200) {
+              const json = JSON.parse(this.response);
+              console.log(json);
+              return resolve(json);
+            } else {
+              return reject({ status: this.status, text: this.statusText })
+            }
+          }
+        };
+        xhr.onerror = reject
+      }
+      else {
+        return reject({ status: 403, text: 'Account not defined' })
+      }
+    });
+  }
+
+  //promise based documents api file search
   //https://docs.oracle.com/en/cloud/paas/content-cloud/rest-api-documents/op-documents-api-1.2-folders-search-items-get.html
   function getFiles() {
     return new Promise((resolve, reject) => {
@@ -20,7 +51,10 @@
               let items = [];
               json.items.forEach(function(item) {
                 if (item.type == 'file') {
-                  items.push(item);
+                  //@todo metadata not returned in parent query
+                  getFileMetadata(item.id).then(function(response) {
+                    items.push(item);
+                  });
                 }
               });
               return resolve(items);

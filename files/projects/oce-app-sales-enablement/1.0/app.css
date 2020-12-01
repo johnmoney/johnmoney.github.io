@@ -108,6 +108,8 @@
 .app .card {
   min-width: 256px;
   max-width: 256px;
+  text-decoration: none;
+  color: inherit;
 }
 .app .card-body {
   padding: 0.75rem;
