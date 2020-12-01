@@ -90,14 +90,17 @@
   //main entry
   getAccount().then(function(account) {
     const accountMenu = document.getElementById('accountMenu');
+    let imgWrapper = document.createElement("div");
+    imgWrapper.classList.add('d-inline-flex');
+    accountMenu.appendChild(imgWrapper);
+
     let imgDiv = document.createElement("div");
     imgDiv.classList.add('user');
     imgDiv.classList.add('rounded-circle');
     imgDiv.classList.add('border');
-    imgDiv.classList.add('d-inline-flex');
     imgDiv.setAttribute('title', account.name);
-    accountMenu.appendChild(imgDiv);
-  
+    imgWrapper.appendChild(imgDiv);
+
     let img = document.createElement("img");
     img.src = account.img;
     img.classList.add('img-fluid');
