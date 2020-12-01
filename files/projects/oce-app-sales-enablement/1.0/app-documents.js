@@ -133,8 +133,8 @@
 
     showLoader();
     getFilesExtended().then(function(files) {
-      console.log(files);
       if (files.length) {
+        console.log(files);
         //add cards-deck div
         let cards = document.createElement("div");
         cards.classList.add('d-flex');
