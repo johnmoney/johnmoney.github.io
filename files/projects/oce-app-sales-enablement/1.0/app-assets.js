@@ -7,11 +7,11 @@
   //https://docs.oracle.com/en/cloud/paas/content-cloud/rest-api-content-delivery/op-published-api-v1.1-items-get.html
   function getItems() {
     return new Promise((resolve, reject) => {
+      const now = new Date();
       const hash = s => s.split('').reduce((a,b)=>{a=((a<<5)-a)+b.charCodeAt(0);return a&a},0);
-      let getRoundedDate = (minutes, d=new Date()) => {
+      let getRoundedDate = (minutes) => {
         let ms = 1000 * 60 * minutes;
-        let roundedDate = new Date(Math.round(d.getTime() / ms) * ms);
-        console.log(roundedDate);
+        let roundedDate = new Date(Math.round(now.getTime() / ms) * ms);
         return roundedDate
       }
 
@@ -32,10 +32,10 @@
       let searchQueryString = searchQuery ? `&default="${searchQuery}"` : '';
 
       let uri = `${config.api.content}/items?q=(type eq "DigitalAsset"${taxonomyQueryString})${searchQueryString}&fields=all&channelToken=${config.channelToken}`;
-      let queryHash = 'app:query:' + hash(uri) + ':' + getRoundedDate(config.api.cacheMinutes);
-      let items = JSON.parse(sessionStorage.getItem(queryHash));
-      if (items) {
-        return resolve(items);
+      let queryHash = 'app:query:' + hash(uri);
+      let cache = JSON.parse(sessionStorage.getItem(queryHash));
+      if (cache && cache.date < now) {
+        return resolve(cache.items);
       }
       else {
         console.info('%cquery: ' + uri, 'color: #0099ff;');
@@ -58,7 +58,7 @@
                   console.error(`${item.id} invalid mimeType ${item.fields.mimeType}`);
                 }
               });
-              sessionStorage.setItem(queryHash, JSON.stringify(items));
+              sessionStorage.setItem(queryHash, JSON.stringify({'date': getRoundedDate(config.api.cacheMinutes), 'items': items}));
               return resolve(items);
             } else {
               return reject({ status: this.status, text: this.statusText })
