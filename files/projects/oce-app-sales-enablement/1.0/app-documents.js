@@ -63,22 +63,21 @@
 
   //promise based wrapper function
   function getFilesExtended() {
-    let files = [];
     let promises = [];
+    let files = [];
+
     getFiles().then(function(items) {
       items.forEach(function(item) {
-        let p = getFileMetadata(item.id).then(function(metadata) {
-          item.metadata = metadata;
-          files.push(item);
-        });
-        promises.push(p);
+        promises.push(
+          getFileMetadata(item.id).then(function(metadata) {
+            item.metadata = metadata;
+            files.push(item);
+          });
+        );
       });
-      return Promise.all(promises);
-    }).then(() => {
-      return files;
-    }).catch((error) => {
-        // process error here
     });
+
+    return Promise.all(promises);
   }
 
   function renderCard(item) {
