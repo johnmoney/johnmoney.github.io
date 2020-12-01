@@ -7,8 +7,8 @@
     return new Promise((resolve, reject) => {
       let account = JSON.parse(sessionStorage.getItem('account'));
       if (account) {
-        console.info('%cquery: ' + uri, 'color: #0099ff;');
         const uri = `${config.api.documents}/files/${fileId}/metadata`;
+        console.info('%cquery: ' + uri, 'color: #0099ff;');
         let xhr = new XMLHttpRequest();
         xhr.open('GET', uri, true);
         xhr.send();
