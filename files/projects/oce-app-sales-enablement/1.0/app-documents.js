@@ -61,25 +61,6 @@
     });
   }
 
-  //promise based wrapper function
-  function getFilesExtended() {
-    let promises = [];
-    let files = [];
-
-    getFiles().then(function(items) {
-      items.forEach(function(item) {
-        promises.push(
-          getFileMetadata(item.id).then(function(metadata) {
-            item.metadata = metadata;
-            files.push(item);
-          });
-        );
-      });
-    });
-
-    return Promise.all(promises);
-  }
-
   function renderCard(item) {
     //console.debug(item);
     let card = document.createElement('a');
@@ -129,7 +110,7 @@
     modalBody.innerHTML = '';
 
     showLoader();
-    getFilesExtended().then(function(files) {
+    getFiles().then(function(files) {
       if (files.length) {
         console.log(files);
         //add cards-deck div
