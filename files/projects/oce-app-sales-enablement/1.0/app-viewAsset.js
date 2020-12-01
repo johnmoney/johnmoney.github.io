@@ -1,4 +1,4 @@
-/* app-modal.js v1.0 */
+/* app-viewAsset.js v1.0 */
 (function (window) {
 
   //promise based asset download
@@ -203,24 +203,8 @@
     alerts.appendChild(alert);
   }
 
-  //main entry
-  const modal = document.getElementById('modal');
-  let html = `
-<div class="modal-dialog" role="document">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h5 class="modal-title text-truncate"></h5>
-      <button type="button" class="btn btn-sm btn-outline-primary" data-dismiss="modal" aria-label="Close">
-        <i class="fa fa-times" aria-hidden="true"></i>
-      </button>
-    </div>
-    <div class="modal-body"></div>
-    <div class="modal-footer justify-content-start"></div>
-  </div>
-</div>`;
-  modal.innerHTML = html;
-
   //render asset in modal
+  const modal = document.getElementById('modal');
   modal.addEventListener('show.bs.modal', function (event) {
     const card = event.relatedTarget;
     const id = card.getAttribute('data-oce-id');
