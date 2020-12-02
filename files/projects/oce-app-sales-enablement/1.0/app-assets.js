@@ -54,14 +54,13 @@
                   sessionStorage.setItem(item.id, JSON.stringify(item));
 
                   //get assetType
-                  let assetType = new Object;
+                  item.assetType = new Object;
                   for (var x=0; x < item.taxonomies.items.length; x++) {
                     if (item.taxonomies.items[x].id == config.assets.filterTaxonomies[0]) {
-                      assetType = item.taxonomies.items[x].categories.items[0];
+                      item.assetType = item.taxonomies.items[x].categories.items[0];
                       break;
                     }
                   }
-                  item.assetType = assetType;
                   items.push(item);
                 }
                 else {
@@ -209,7 +208,7 @@
     cardTop.src = `/documents/web?IdcService=GET_THUMBNAIL&item=arCaaSGUID:${item.id}&arCaaSVersion=1&timeStamp=1605921816141`;
     card.appendChild(cardTop);
 
-    if (item.assetType.name !== undefined) {
+    if (item.assetType !== undefined) {
       let cardLabel = document.createElement('div');
       cardLabel.classList.add('card-label');
       cardLabel.classList.add('category-' + item.assetType.id);

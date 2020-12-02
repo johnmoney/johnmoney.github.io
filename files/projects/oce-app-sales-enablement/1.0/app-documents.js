@@ -97,7 +97,7 @@
     card.appendChild(cardTop);
 
     if (asset) {
-      if (asset.assetType.name != undefined) {
+      if (asset.assetType != undefined) {
         let cardLabel = document.createElement('div');
         cardLabel.classList.add('card-label');
         cardLabel.classList.add('category-' + asset.assetType.id);
