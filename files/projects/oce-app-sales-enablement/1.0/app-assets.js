@@ -51,8 +51,6 @@
               let items = [];
               json.items.forEach(function(item) {
                 if (config.assets.validMimeTypes.includes(item.fields.mimeType)) {
-                  sessionStorage.setItem(item.id, JSON.stringify(item));
-
                   //get assetType
                   item.assetType = new Object;
                   for (var x=0; x < item.taxonomies.items.length; x++) {
@@ -61,6 +59,8 @@
                       break;
                     }
                   }
+
+                  sessionStorage.setItem(item.id, JSON.stringify(item));
                   items.push(item);
                 }
                 else {
