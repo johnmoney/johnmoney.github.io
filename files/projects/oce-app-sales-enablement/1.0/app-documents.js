@@ -50,8 +50,11 @@
                   items.push(item);
                 }
               });
-              Promise.all(promises).then((results) => {
-                console.log(results);
+              Promise.all(promises).then((metadata) => {
+                json.items.forEach(function(item, idx) {
+                  item.metaEnhanced = metadata[idx];
+                });
+                console.log(items);
                 return resolve(items);
               });
             } else {
