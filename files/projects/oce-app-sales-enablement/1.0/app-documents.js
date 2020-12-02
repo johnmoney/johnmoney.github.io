@@ -72,11 +72,11 @@
 
   function renderCard(item) {
     //console.debug(item);
-    var asset;
+    var asset, itemAssetId, itemAssetVersion;
     if (item.metadata !== undefined) {
-        if (item.metadata[config.documents.collection] !== undefined) {
-        let itemAssetId = item.metadata[config.documents.collection][config.documents.sourceField];
-        let itemAssetVersion = item.metadata[config.documents.collection][config.documents.sourceVersionField];
+      if (item.metadata[config.documents.collection] !== undefined) {
+        itemAssetId = item.metadata[config.documents.collection][config.documents.sourceField];
+        itemAssetVersion = item.metadata[config.documents.collection][config.documents.sourceVersionField];
         if (itemAssetId) {
           asset = JSON.parse(sessionStorage.getItem(itemAssetId));
         }
