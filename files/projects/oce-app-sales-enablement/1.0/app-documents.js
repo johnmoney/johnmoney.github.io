@@ -61,6 +61,29 @@
     });
   }
 
+  function getFilesMeta() {
+    var promises = [];
+    var files = [];
+
+    getFiles().then(function(items) {
+      items.forEach(function(item) {
+        promises.push(
+          getFileMetadata(item.id)
+            .then((response) = > {
+              item.metadata = response;
+              self.files.push(item);
+            }).catch ((error) = > {
+                console.log('Error: ', error);
+            })
+        );
+      });
+    });
+
+    Promise.all(promises).then(() => 
+      console.log(files);
+    );
+  }
+
   function renderCard(item) {
     //console.debug(item);
     let card = document.createElement('a');
@@ -109,10 +132,12 @@
     const modalBody = modal.getElementsByClassName('modal-body')[0];
     modalBody.innerHTML = '';
 
+    //test
+    getFilesMeta();
+
     showLoader();
     getFiles().then(function(files) {
       if (files.length) {
-        console.log(files);
         //add cards-deck div
         let cards = document.createElement("div");
         cards.classList.add('d-flex');
@@ -127,8 +152,7 @@
         timeago().render(document.querySelectorAll('.timeago'));
       }
       else {
-        createAlert('No documents', 'warning');
-        //        renderNoResults();
+        renderNoResults();
       }
 
       showLoader(false);
@@ -184,6 +208,16 @@
     alerts.appendChild(alert);
   }
 
+  function renderNoResults() {
+    const modal = document.getElementById('modal');
+    const modalBody = modal.getElementsByClassName('modal-body')[0];
+    modalBody.innerHTML = '';
+    let container = document.createElement("h3");
+    container.classList.add('my-5');
+    container.classList.add('text-center');
+    container.innerText = 'No documents found';
+    modalBody.appendChild(container);
+  }
 
   //main entry
   document.getElementById('documents-menu').addEventListener('click', renderDocuments);
