@@ -118,7 +118,29 @@
     modalBody.innerHTML = '';
     showLoader();
 
-    getFiles().then(function(files) {
+    var promises = [];
+    var files = [];
+
+    getFiles().then(function(items) {
+      items.forEach(function(item) {
+        promises.push(
+          new Promise((resolve, reject) => {
+            getFileMetadata(item.id)
+            .then((response) => {
+              item.metadata = response;
+              files.push(item);
+              resolve();
+            }).catch ((e) => {
+              console.error(e);
+              //showLoader(false);
+              //createAlert('An error has occurred loading documents.', 'danger');
+            });
+          })
+        );
+      });
+    });
+
+    Promise.all(promises).then(() => { 
       console.log(files);
       if (files.length) {
         //add cards-deck div
