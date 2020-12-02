@@ -317,10 +317,19 @@
 
       //add categories
       for (var x=0; x < item.taxonomies.items.length; x++) {
+        let div = document.createElement('div');
+        for (var z=0; z < config.assets.filterTaxonomies.length; z++) {
+          if (item.taxonomies.items[x].id == config.assets.filterTaxonomies[z]) {
+            div.classList.add('order-' + z);
+            break;
+          }
+        }
+        dl.appendChild(div);
+
         let dt = document.createElement('dt');
         dt.classList.add('col-4');
         dt.textContent = item.taxonomies.items[x].name;
-        dl.appendChild(dt);
+        div.appendChild(dt);
 
         let categories = new Array;
         for (var y=0; y < item.taxonomies.items[x].categories.items.length; y++) {
@@ -329,7 +338,7 @@
         let dd = document.createElement('dd');
         dd.classList.add('col-8');
         dd.textContent = categories.join(', ');
-        dl.appendChild(dd);
+        div.appendChild(dd);
       }
 
       //add version
