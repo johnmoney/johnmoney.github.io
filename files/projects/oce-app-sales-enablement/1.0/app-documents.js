@@ -126,8 +126,10 @@
         promises.push(
           getFileMetadata(item.id)
             .then((response) => {
+              console.log(response);
               item.metadata = response;
               files.push(item);
+              Promise.resolve();
             }).catch ((e) => {
               console.error(e);
               showLoader(false);
