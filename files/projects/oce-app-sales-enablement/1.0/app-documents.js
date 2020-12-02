@@ -109,6 +109,16 @@
     return card;
   }
 
+  function getFilesMeta(item) {
+    return new Promise((resolve, reject) => {
+      getFileMetadata(item.id)
+      .then((response) => {
+        item.metadata = response;
+        resolve(item);
+      });
+    })
+  }
+
   function renderDocuments() {
     const modal = document.getElementById('modal');
     const modalTitle = modal.getElementsByClassName('modal-title')[0];
@@ -123,21 +133,12 @@
 
     getFiles().then(function(items) {
       items.forEach(function(item) {
-        promises.push(
-          return new Promise((resolve, reject) => {
-            getFileMetadata(item.id)
-            .then((response) => {
-              item.metadata = response;
-              files.push(item);
-              resolve(item.id);
-            });
-          })
-        );
+        promises.push(getFilesMeta(item));
       });
     });
 
-    Promise.all(promises).then(() => { 
-      console.log(files);
+    Promise.all(promises).then((results) => { 
+      console.log(results);
       if (files.length) {
         //add cards-deck div
         let cards = document.createElement("div");
