@@ -72,8 +72,8 @@
             .then((response) => {
               item.metadata = response;
               self.files.push(item);
-            }).catch ((error) = > {
-                console.log('Error: ', error);
+            }).catch ((error) => {
+                console.error('Error: ', error);
             })
         );
       });
