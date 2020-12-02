@@ -75,12 +75,12 @@
     var asset;
     if (item.metadata !== undefined) {
         if (item.metadata[config.documents.collection] !== undefined) {
-        let assetId = item.metadata[config.documents.collection][config.documents.sourceField];
-        let assetVersion = item.metadata[config.documents.collection][config.documents.sourceVersionField];
-        if (assetId) {
-          asset = JSON.parse(sessionStorage.getItem(assetId));
+        let itemAssetId = item.metadata[config.documents.collection][config.documents.sourceField];
+        let itemAssetVersion = item.metadata[config.documents.collection][config.documents.sourceVersionField];
+        if (itemAssetId) {
+          asset = JSON.parse(sessionStorage.getItem(itemAssetId));
         }
-        console.debug(asset);
+        //console.debug(asset);
       }
     }
 
@@ -122,6 +122,18 @@
     cardText.classList.add('card-text');
     cardText.classList.add('flex-grow-1');
     cardBody.appendChild(cardText);
+
+    if (itemAssetVersion) {
+      //check version
+      let assetVersionText = document.createElement('div');
+      assetVersionText.innerHTML = `Asset version: <span class="badge rounded-pill bg-primary">${itemAssetVersion}</span>`;
+      if (asset) {
+        if (itemAssetVersion != asset.fields.version) {
+          assetVersionText.innerHTML = `Asset version: <span class="badge rounded-pill bg-danger" data-toggle="tooltip" data-placement="right" title="The asset has been updated">${itemAssetVersion}</span>`;
+        }
+      }
+      cardText.appendChild(assetVersionText);
+    }
 
     let cardFooter = document.createElement('div');
     cardFooter.classList.add('card-footer');
