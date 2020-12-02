@@ -124,17 +124,18 @@
     getFiles().then(function(items) {
       items.forEach(function(item) {
         promises.push(
-          getFileMetadata(item.id)
+          new Promise(resolve => {
+            getFileMetadata(item.id)
             .then((response) => {
               console.log(response);
               item.metadata = response;
               files.push(item);
-              Promise.resolve();
             }).catch ((e) => {
               console.error(e);
               showLoader(false);
               createAlert('An error has occurred loading documents.', 'danger');
             })
+          });
         );
       });
     });
