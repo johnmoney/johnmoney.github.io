@@ -79,9 +79,9 @@
       });
     });
 
-    Promise.all(promises).then(() => 
+    Promise.all(promises).then(() => { 
       console.log(files);
-    );
+    });
   }
 
   function renderCard(item) {
