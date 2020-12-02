@@ -128,17 +128,7 @@
     modalBody.innerHTML = '';
     showLoader();
 
-    var promises = [];
-    var files = [];
-
-    getFiles().then(function(items) {
-      items.forEach(function(item) {
-        promises.push(getFileMetadata(item.id));
-      });
-    });
-
-    Promise.all(promises).then((results) => { 
-      console.log(results);
+    getFiles().then(function(files) {
       if (files.length) {
         //add cards-deck div
         let cards = document.createElement("div");
@@ -157,7 +147,7 @@
         renderNoResults();
       }
 
-//      showLoader(false);
+      showLoader(false);
     });
 
     const modalFooter = modal.getElementsByClassName('modal-footer')[0];
