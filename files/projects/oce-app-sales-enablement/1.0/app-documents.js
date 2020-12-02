@@ -149,7 +149,7 @@
         renderNoResults();
       }
 
-//      showLoader(false);
+      showLoader(false);
     });
 
     const modalFooter = modal.getElementsByClassName('modal-footer')[0];
