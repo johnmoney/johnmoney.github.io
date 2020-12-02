@@ -342,7 +342,7 @@
       let div = document.createElement('dl');
       div.classList.add('row');
       div.classList.add('order-99');
-      dl.appendChild(div);
+      col1.appendChild(div);
 
       let dt = document.createElement('dt');
       dt.classList.add('col-4');
