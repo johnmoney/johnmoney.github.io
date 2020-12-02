@@ -46,9 +46,7 @@
               json.items.forEach(function(item) {
                 if (item.type == 'file') {
                   //getFiles not returning metadata per docs
-                  promises.push(
-                    getFileMetadata(item.id);
-                  );
+                  promises.push(getFileMetadata(item.id));
                   items.push(item);
                 }
               });
