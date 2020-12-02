@@ -123,23 +123,40 @@
     cardText.classList.add('flex-grow-1');
     cardBody.appendChild(cardText);
 
-    if (itemAssetVersion) {
-      //check version
-      let assetVersionText = document.createElement('div');
-      assetVersionText.innerHTML = `Asset version: <span class="badge rounded-pill bg-primary">${itemAssetVersion}</span>`;
-      if (asset) {
-        if (itemAssetVersion != asset.fields.version) {
-          assetVersionText.innerHTML = `Asset version: <span class="badge rounded-pill bg-danger" data-toggle="tooltip" data-placement="right" title="The asset has been updated">${itemAssetVersion}</span>`;
-        }
-      }
-      cardText.appendChild(assetVersionText);
-    }
-
     let cardFooter = document.createElement('div');
     cardFooter.classList.add('card-footer');
-    cardFooter.classList.add('text-muted');
-    cardFooter.innerHTML = `Updated <span class="timeago" datetime="${item.modifiedTime}">${item.modifiedTime}</span>`;
+    cardFooter.classList.add('d-flex');
+    cardFooter.classList.add('justify-content-between');
     card.appendChild(cardFooter);
+
+    let icons = document.createElement('div');
+    cardFooter.appendChild(icons);
+
+    if (itemAssetVersion) {
+      //check version
+      let assetVersionIcon = document.createElement('div');
+      assetVersionIcon.classList.add('badge');
+      assetVersionIcon.classList.add('rounded-pill');
+      assetVersionIcon.classList.add('bg-success');
+      assetVersionIcon.setAttribute('data-toggle', 'tooltip');
+      assetVersionIcon.setAttribute('data-placement', 'right');
+      assetVersionIcon.setAttribute('title', 'Document is using the latest asset version');
+      assetVersionIcon.textContent = itemAssetVersion;
+
+      if (asset) {
+        if (itemAssetVersion != asset.fields.version) {
+          assetVersionIcon.classList.remove('bg-success');
+          assetVersionIcon.classList.add('bg-danger');
+          assetVersionIcon.setAttribute('title', 'Document is using outdated asset version');
+        }
+      }
+      icons.appendChild(assetVersionIcon);
+    }
+
+    let updated = document.createElement('div');
+    updated.classList.add('text-muted');
+    updated.innerHTML = `Updated <span class="timeago" datetime="${item.modifiedTime}">${item.modifiedTime}</span>`;
+    cardFooter.appendChild(updated);
 
     return card;
   }
@@ -167,6 +184,12 @@
 
         //update timeago
         timeago().render(document.querySelectorAll('.timeago'));
+
+        //update tooltips
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('#modal [data-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+          return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
       }
       else {
         renderNoResults();
