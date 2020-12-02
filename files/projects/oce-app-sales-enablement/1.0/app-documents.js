@@ -69,7 +69,7 @@
       items.forEach(function(item) {
         promises.push(
           getFileMetadata(item.id)
-            .then((response) = > {
+            .then((response) => {
               item.metadata = response;
               self.files.push(item);
             }).catch ((error) = > {
