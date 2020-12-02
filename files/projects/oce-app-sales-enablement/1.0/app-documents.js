@@ -133,7 +133,7 @@
 
     getFiles().then(function(items) {
       items.forEach(function(item) {
-        promises.push(getFilesWithMetadata(item));
+        promises.push(getFileMetadata(item.id));
       });
     });
 
