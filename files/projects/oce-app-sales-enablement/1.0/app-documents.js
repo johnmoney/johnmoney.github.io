@@ -124,12 +124,12 @@
     getFiles().then(function(items) {
       items.forEach(function(item) {
         promises.push(
-          new Promise(resolve => {
+          new Promise((resolve, reject) => {
             getFileMetadata(item.id)
             .then((response) => {
-              console.log(response);
               item.metadata = response;
               files.push(item);
+              resolve();
             }).catch ((e) => {
               console.error(e);
               //showLoader(false);
@@ -141,7 +141,7 @@
     });
 
     Promise.all(promises).then(() => { 
-      console.log(files.length);
+      console.log(files);
       if (files.length) {
         //add cards-deck div
         let cards = document.createElement("div");
