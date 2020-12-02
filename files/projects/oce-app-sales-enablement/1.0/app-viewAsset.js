@@ -308,7 +308,7 @@
       container.appendChild(row);
 
       let col1 = document.createElement('div');
-      col1.classList.add('col');
+      col1.classList.add('col-7');
       row.appendChild(col1);
 
       let dl = document.createElement('dl');
@@ -342,18 +342,22 @@
       }
 
       //add version
+      let div = document.createElement('div');
+      div.classList.add('order-99');
+      dl.appendChild(div);
+
       let dt = document.createElement('dt');
       dt.classList.add('col-4');
       dt.textContent = 'Version';
-      dl.appendChild(dt);
+      div.appendChild(dt);
 
       let dd = document.createElement('dd');
       dd.classList.add('col-8');
       dd.textContent = item.fields.version;
-      dl.appendChild(dd);
+      div.appendChild(dd);
 
       let col2 = document.createElement('div');
-      col2.classList.add('col');
+      col2.classList.add('col-5');
       row.appendChild(col2);
 
       const modalFooter = modal.getElementsByClassName('modal-footer')[0];
