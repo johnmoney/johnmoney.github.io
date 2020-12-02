@@ -64,10 +64,12 @@
   function renderCard(item) {
     //console.debug(item);
     var asset;
-    let assetId = item.metadata[config.documents.collection][config.documents.sourceField];
-    let assetVersion = item.metadata[config.documents.collection][config.documents.sourceVersionField];
-    if (assetId) {
-      asset = JSON.parse(sessionStorage.getItem(assetId));
+    if (item.metadata.length) {
+      let assetId = item.metadata[config.documents.collection][config.documents.sourceField];
+      let assetVersion = item.metadata[config.documents.collection][config.documents.sourceVersionField];
+      if (assetId) {
+        asset = JSON.parse(sessionStorage.getItem(assetId));
+      }
     }
     console.debug(asset);
 
