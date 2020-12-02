@@ -109,12 +109,12 @@
     return card;
   }
 
-  function getFilesMeta(item) {
+  function getFilesWithMetadata(item) {
     return new Promise((resolve, reject) => {
       getFileMetadata(item.id)
       .then((response) => {
         item.metadata = response;
-        resolve(item);
+        return resolve(item);
       });
     })
   }
@@ -133,7 +133,7 @@
 
     getFiles().then(function(items) {
       items.forEach(function(item) {
-        promises.push(getFilesMeta(item));
+        promises.push(getFilesWithMetadata(item));
       });
     });
 
