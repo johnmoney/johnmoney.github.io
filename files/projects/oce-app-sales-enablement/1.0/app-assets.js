@@ -199,6 +199,11 @@
     cardTop.src = `/documents/web?IdcService=GET_THUMBNAIL&item=arCaaSGUID:${item.id}&arCaaSVersion=1&timeStamp=1605921816141`;
     card.appendChild(cardTop);
 
+    let cardLabel = document.createElement('div');
+    cardLabel.classList.add('card-label');
+    cardLabel.textContent = item.taxonomies.0.categories.items.0.name;
+    card.appendChild(cardLabel);
+
     let cardBody = document.createElement('div');
     cardBody.classList.add('card-body');
     cardBody.classList.add('d-flex');

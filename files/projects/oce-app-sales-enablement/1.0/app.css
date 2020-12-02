@@ -106,10 +106,21 @@
 
 /* cards 16:9 */
 .app .card {
+  position: relative;
   min-width: 256px;
   max-width: 256px;
   text-decoration: none;
   color: inherit;
+}
+.app .card-label {
+  position: absolute;
+  top: 100px;
+  width: 100%;
+  padding: 0 0.5rem;
+  color: #FFF;
+  font-size: 0.9rem;
+  background: rgb(183,161,196);
+  background: linear-gradient(115deg, rgb(183, 161, 196) 66%, rgba(255,255,255,0) 95%);
 }
 .app .card-body {
   padding: 0.75rem;
