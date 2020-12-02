@@ -132,10 +132,10 @@
               files.push(item);
             }).catch ((e) => {
               console.error(e);
-              showLoader(false);
-              createAlert('An error has occurred loading documents.', 'danger');
-            })
-          });
+              //showLoader(false);
+              //createAlert('An error has occurred loading documents.', 'danger');
+            });
+          })
         );
       });
     });
