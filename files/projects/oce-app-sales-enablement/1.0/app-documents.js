@@ -73,7 +73,7 @@
   function renderCard(item) {
     //console.debug(item);
     var asset;
-    if (item.metadata[config.documents.collection]) {
+    if (item.metadata && item.metadata[config.documents.collection]) {
       let assetId = item.metadata[config.documents.collection][config.documents.sourceField];
       let assetVersion = item.metadata[config.documents.collection][config.documents.sourceVersionField];
       if (assetId) {
@@ -118,16 +118,6 @@
     card.appendChild(cardFooter);
 
     return card;
-  }
-
-  function getFilesWithMetadata(item) {
-    return new Promise((resolve, reject) => {
-      getFileMetadata(item.id)
-      .then((response) => {
-        item.metadata = response;
-        return resolve(item);
-      });
-    })
   }
 
   function renderDocuments() {
