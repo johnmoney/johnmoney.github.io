@@ -124,16 +124,12 @@
     getFiles().then(function(items) {
       items.forEach(function(item) {
         promises.push(
-          new Promise((resolve, reject) => {
+          return new Promise((resolve, reject) => {
             getFileMetadata(item.id)
             .then((response) => {
               item.metadata = response;
               files.push(item);
-              resolve();
-            }).catch ((e) => {
-              console.error(e);
-              //showLoader(false);
-              //createAlert('An error has occurred loading documents.', 'danger');
+              resolve(item.id);
             });
           })
         );
