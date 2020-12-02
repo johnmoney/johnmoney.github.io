@@ -300,14 +300,15 @@
 
       let container = document.createElement('div');
       container.classList.add('container');
+      container.classList.add('mt-2');
       modalBody.appendChild(container);
 
       let row = document.createElement('div');
-      container.classList.add('row');
+      row.classList.add('row');
       container.appendChild(row);
 
       let col1 = document.createElement('div');
-      container.classList.add('col');
+      col1.classList.add('col');
       row.appendChild(col1);
 
       let dl = document.createElement('dl');
@@ -330,7 +331,7 @@
       }
 
       let col2 = document.createElement('div');
-      container.classList.add('col');
+      col2.classList.add('col');
       row.appendChild(col2);
 
       const modalFooter = modal.getElementsByClassName('modal-footer')[0];
