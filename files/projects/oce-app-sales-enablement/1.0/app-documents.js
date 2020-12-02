@@ -96,6 +96,16 @@
     cardTop.src = `/documents/web?IdcService=GET_THUMBNAIL&item=fFileGUID:${item.id}&arCaaSVersion=1&timeStamp=1605921816141`;
     card.appendChild(cardTop);
 
+    if (asset) {
+      if (asset.assetType.name != undefined) {
+        let cardLabel = document.createElement('div');
+        cardLabel.classList.add('card-label');
+        cardLabel.classList.add('category-' + asset.assetType.id);
+        cardLabel.textContent = asset.assetType.name;
+        card.appendChild(cardLabel);
+      }
+    }
+
     let cardBody = document.createElement('div');
     cardBody.classList.add('card-body');
     cardBody.classList.add('d-flex');

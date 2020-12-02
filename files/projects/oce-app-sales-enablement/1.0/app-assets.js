@@ -52,6 +52,16 @@
               json.items.forEach(function(item) {
                 if (config.assets.validMimeTypes.includes(item.fields.mimeType)) {
                   sessionStorage.setItem(item.id, JSON.stringify(item));
+
+                  //get assetType
+                  let assetType = new Object;
+                  for (var x=0; x < item.taxonomies.items.length; x++) {
+                    if (item.taxonomies.items[x].id == config.assets.filterTaxonomies[0]) {
+                      assetType = item.taxonomies.items[x].categories.items[0];
+                      break;
+                    }
+                  }
+                  item.assetType = assetType;
                   items.push(item);
                 }
                 else {
@@ -199,18 +209,11 @@
     cardTop.src = `/documents/web?IdcService=GET_THUMBNAIL&item=arCaaSGUID:${item.id}&arCaaSVersion=1&timeStamp=1605921816141`;
     card.appendChild(cardTop);
 
-    let assetType = new Object;
-    for (var x=0; x < item.taxonomies.items.length; x++) {
-      if (item.taxonomies.items[x].id == config.assets.filterTaxonomies[0]) {
-        assetType = item.taxonomies.items[x].categories.items[0];
-        break;
-      }
-    }
-    if (assetType.name) {
+    if (item.assetType.name !== undefined) {
       let cardLabel = document.createElement('div');
       cardLabel.classList.add('card-label');
-      cardLabel.classList.add('category-' + assetType.id);
-      cardLabel.textContent = assetType.name;
+      cardLabel.classList.add('category-' + item.assetType.id);
+      cardLabel.textContent = item.assetType.name;
       card.appendChild(cardLabel);
     }
 
