@@ -42,12 +42,20 @@
             if (this.status === 200) {
               const json = JSON.parse(this.response);
               let items = [];
+              let promises = [];
               json.items.forEach(function(item) {
                 if (item.type == 'file') {
+                  //getFiles not returning metadata per docs
+                  promises.push(
+                    getFileMetadata(item.id);
+                  );
                   items.push(item);
                 }
               });
-              return resolve(items);
+              Promise.all(promises).then((results) => {
+                console.log(results);
+                return resolve(items);
+              });
             } else {
               return reject({ status: this.status, text: this.statusText })
             }
