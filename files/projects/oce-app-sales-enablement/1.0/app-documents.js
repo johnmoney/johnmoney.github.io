@@ -71,7 +71,7 @@
           getFileMetadata(item.id)
             .then((response) => {
               item.metadata = response;
-              self.files.push(item);
+              files.push(item);
             }).catch ((error) => {
                 console.error('Error: ', error);
             })
