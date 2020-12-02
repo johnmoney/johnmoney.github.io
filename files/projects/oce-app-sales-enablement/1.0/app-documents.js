@@ -73,13 +73,15 @@
   function renderCard(item) {
     //console.debug(item);
     var asset;
-    if (item.metadata && item.metadata[config.documents.collection]) {
-      let assetId = item.metadata[config.documents.collection][config.documents.sourceField];
-      let assetVersion = item.metadata[config.documents.collection][config.documents.sourceVersionField];
-      if (assetId) {
-        asset = JSON.parse(sessionStorage.getItem(assetId));
+    if (item.metadata !== undefined) {
+        if (item.metadata[config.documents.collection] !== undefined) {
+        let assetId = item.metadata[config.documents.collection][config.documents.sourceField];
+        let assetVersion = item.metadata[config.documents.collection][config.documents.sourceVersionField];
+        if (assetId) {
+          asset = JSON.parse(sessionStorage.getItem(assetId));
+        }
+        console.debug(asset);
       }
-      console.debug(asset);
     }
 
     let card = document.createElement('a');
