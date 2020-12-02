@@ -300,7 +300,7 @@
 
       let container = document.createElement('div');
       container.classList.add('container');
-      container.classList.add('mt-2');
+      container.classList.add('mt-4');
       modalBody.appendChild(container);
 
       let row = document.createElement('div');
@@ -314,9 +314,11 @@
       let dl = document.createElement('dl');
       dl.classList.add('row');
       col1.appendChild(dl);
+
+      //add categories
       for (var x=0; x < item.taxonomies.items.length; x++) {
         let dt = document.createElement('dt');
-        dt.classList.add('col-sm-3');
+        dt.classList.add('col-4');
         dt.textContent = item.taxonomies.items[x].name;
         dl.appendChild(dt);
 
@@ -325,10 +327,21 @@
           categories.push(item.taxonomies.items[x].categories.items[y].name);
         }
         let dd = document.createElement('dd');
-        dd.classList.add('col-sm-9');
+        dd.classList.add('col-8');
         dd.textContent = categories.join(', ');
         dl.appendChild(dd);
       }
+
+      //add version
+      let dt = document.createElement('dt');
+      dt.classList.add('col-4');
+      dt.textContent = 'Version';
+      dl.appendChild(dt);
+
+      let dd = document.createElement('dd');
+      dd.classList.add('col-8');
+      dd.textContent = item.fields.version;
+      dl.appendChild(dd);
 
       let col2 = document.createElement('div');
       col2.classList.add('col');
