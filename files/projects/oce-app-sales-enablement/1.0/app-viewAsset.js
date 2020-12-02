@@ -311,20 +311,17 @@
       col1.classList.add('col-7');
       row.appendChild(col1);
 
-      let dl = document.createElement('dl');
-      dl.classList.add('row');
-      col1.appendChild(dl);
-
       //add categories
       for (var x=0; x < item.taxonomies.items.length; x++) {
-        let div = document.createElement('div');
+        let div = document.createElement('dl');
+        div.classList.add('row');
         for (var z=0; z < config.assets.filterTaxonomies.length; z++) {
           if (item.taxonomies.items[x].id == config.assets.filterTaxonomies[z]) {
             div.classList.add('order-' + z);
             break;
           }
         }
-        dl.appendChild(div);
+        col1.appendChild(div);
 
         let dt = document.createElement('dt');
         dt.classList.add('col-4');
@@ -342,7 +339,8 @@
       }
 
       //add version
-      let div = document.createElement('div');
+      let div = document.createElement('dl');
+      div.classList.add('row');
       div.classList.add('order-99');
       dl.appendChild(div);
 
