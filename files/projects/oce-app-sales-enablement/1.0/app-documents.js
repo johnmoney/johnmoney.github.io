@@ -61,31 +61,16 @@
     });
   }
 
-  function getFilesMeta() {
-    var promises = [];
-    var files = [];
-
-    getFiles().then(function(items) {
-      items.forEach(function(item) {
-        promises.push(
-          getFileMetadata(item.id)
-            .then((response) => {
-              item.metadata = response;
-              files.push(item);
-            }).catch ((error) => {
-                console.error('Error: ', error);
-            })
-        );
-      });
-    });
-
-    Promise.all(promises).then(() => { 
-      console.log(files);
-    });
-  }
-
   function renderCard(item) {
     //console.debug(item);
+    var asset;
+    let assetId = item.metadata[config.documents.collection][config.documents.sourceField];
+    let assetVersion = item.metadata[config.documents.collection][config.documents.sourceVersionField];
+    if (assetId) {
+      asset = JSON.parse(sessionStorage.getItem(assetId));
+    }
+    console.debug(asset);
+
     let card = document.createElement('a');
     card.classList.add('card');
     card.classList.add('mr-3');
@@ -131,12 +116,28 @@
 
     const modalBody = modal.getElementsByClassName('modal-body')[0];
     modalBody.innerHTML = '';
-
-    //test
-    getFilesMeta();
-
     showLoader();
-    getFiles().then(function(files) {
+
+    var promises = [];
+    var files = [];
+
+    getFiles().then(function(items) {
+      items.forEach(function(item) {
+        promises.push(
+          getFileMetadata(item.id)
+            .then((response) => {
+              item.metadata = response;
+              files.push(item);
+            }).catch ((e) => {
+              console.error(e);
+              showLoader(false);
+              createAlert('An error has occurred loading documents.', 'danger');
+            })
+        );
+      });
+    });
+
+    Promise.all(promises).then(() => { 
       if (files.length) {
         //add cards-deck div
         let cards = document.createElement("div");
@@ -156,11 +157,6 @@
       }
 
       showLoader(false);
-    })
-    .catch((e) => {
-      console.error(e);
-      showLoader(false);
-      createAlert('An error has occurred loading documents.', 'danger');
     });
 
     const modalFooter = modal.getElementsByClassName('modal-footer')[0];
