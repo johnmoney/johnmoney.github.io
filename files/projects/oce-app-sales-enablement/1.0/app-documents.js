@@ -64,14 +64,14 @@
   function renderCard(item) {
     //console.debug(item);
     var asset;
-    if (item.metadata.length) {
+    if (item.metadata[config.documents.collection]) {
       let assetId = item.metadata[config.documents.collection][config.documents.sourceField];
       let assetVersion = item.metadata[config.documents.collection][config.documents.sourceVersionField];
       if (assetId) {
         asset = JSON.parse(sessionStorage.getItem(assetId));
       }
+      console.debug(asset);
     }
-    console.debug(asset);
 
     let card = document.createElement('a');
     card.classList.add('card');
@@ -130,7 +130,17 @@
     modalBody.innerHTML = '';
     showLoader();
 
-    getFiles().then(function(files) {
+    var promises = [];
+    var files = [];
+
+    getFiles().then(function(items) {
+      items.forEach(function(item) {
+        promises.push(getFileMetadata(item.id));
+      });
+    });
+
+    Promise.all(promises).then((results) => { 
+      console.log(results);
       if (files.length) {
         //add cards-deck div
         let cards = document.createElement("div");
@@ -149,7 +159,7 @@
         renderNoResults();
       }
 
-      showLoader(false);
+//      showLoader(false);
     });
 
     const modalFooter = modal.getElementsByClassName('modal-footer')[0];
