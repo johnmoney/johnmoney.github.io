@@ -52,9 +52,9 @@
               });
               Promise.all(promises).then((metadata) => {
                 json.items.forEach(function(item, idx) {
-                  item.metaEnhanced = metadata[idx];
+                  item.metadata = metadata[idx];
                 });
-                console.log(items);
+                //console.debug(items);
                 return resolve(items);
               });
             } else {
