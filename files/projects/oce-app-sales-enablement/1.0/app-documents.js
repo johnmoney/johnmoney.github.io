@@ -137,7 +137,8 @@
       });
     });
 
-    Promise.all(promises).then((files) => { 
+    Promise.all(promises).then(() => { 
+      console.log(files);
       if (files.length) {
         //add cards-deck div
         let cards = document.createElement("div");
