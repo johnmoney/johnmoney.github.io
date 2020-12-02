@@ -199,10 +199,20 @@
     cardTop.src = `/documents/web?IdcService=GET_THUMBNAIL&item=arCaaSGUID:${item.id}&arCaaSVersion=1&timeStamp=1605921816141`;
     card.appendChild(cardTop);
 
-    let cardLabel = document.createElement('div');
-    cardLabel.classList.add('card-label');
-    cardLabel.textContent = item.taxonomies.0.categories.items.0.name;
-    card.appendChild(cardLabel);
+    let assetType = new Object;
+    for (var x=0; x < item.taxonomies.items.length; x++) {
+      if (item.taxonomies.items[x].id == config.assets.filterTaxonomies[0]) {
+        assetType = item.taxonomies.items[x].categories.items[0];
+        break;
+      }
+    }
+    if (assetType.name) {
+      let cardLabel = document.createElement('div');
+      cardLabel.classList.add('card-label');
+      cardLabel.classList.add('category-' + assetType.id);
+      cardLabel.textContent = assetType.name;
+      card.appendChild(cardLabel);
+    }
 
     let cardBody = document.createElement('div');
     cardBody.classList.add('card-body');
