@@ -141,7 +141,7 @@
     });
 
     Promise.all(promises).then(() => { 
-      console.log(files);
+      console.log(files.length);
       if (files.length) {
         //add cards-deck div
         let cards = document.createElement("div");
