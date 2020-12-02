@@ -308,7 +308,7 @@
       container.appendChild(row);
 
       let col1 = document.createElement('div');
-      col1.classList.add('col-7');
+      col1.classList.add('col');
       row.appendChild(col1);
 
       let dl = document.createElement('dl');
@@ -317,19 +317,10 @@
 
       //add categories
       for (var x=0; x < item.taxonomies.items.length; x++) {
-        let div = document.createElement('div');
-        for (var z=0; z < config.assets.filterTaxonomies.length; z++) {
-          if (item.taxonomies.items[x].id == config.assets.filterTaxonomies[z]) {
-            div.classList.add('order-' + z);
-            break;
-          }
-        }
-        dl.appendChild(div);
-
         let dt = document.createElement('dt');
         dt.classList.add('col-4');
         dt.textContent = item.taxonomies.items[x].name;
-        div.appendChild(dt);
+        dl.appendChild(dt);
 
         let categories = new Array;
         for (var y=0; y < item.taxonomies.items[x].categories.items.length; y++) {
@@ -338,26 +329,22 @@
         let dd = document.createElement('dd');
         dd.classList.add('col-8');
         dd.textContent = categories.join(', ');
-        div.appendChild(dd);
+        dl.appendChild(dd);
       }
 
       //add version
-      let dl2 = document.createElement('dl');
-      dl2.classList.add('row');
-      col1.appendChild(dl2);
-
       let dt = document.createElement('dt');
       dt.classList.add('col-4');
       dt.textContent = 'Version';
-      dl2.appendChild(dt);
+      dl.appendChild(dt);
 
       let dd = document.createElement('dd');
       dd.classList.add('col-8');
       dd.textContent = item.fields.version;
-      dl2.appendChild(dd);
+      dl.appendChild(dd);
 
       let col2 = document.createElement('div');
-      col2.classList.add('col-5');
+      col2.classList.add('col');
       row.appendChild(col2);
 
       const modalFooter = modal.getElementsByClassName('modal-footer')[0];
