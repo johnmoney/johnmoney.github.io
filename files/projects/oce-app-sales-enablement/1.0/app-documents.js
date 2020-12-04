@@ -207,7 +207,7 @@
     if (showLoader) {
       const modal = document.getElementById('modal');
       const modalBody = modal.getElementsByClassName('modal-body')[0];
-      modalBody.innerHTML = '<div id="modal-loader" class="container"><div class="row my-5"><div class="col-8 mx-auto text-center"><div class="pt-4 overflow-hidden"><div class="ball-pulse"><div></div><div></div><div></div></div></div></div></div></div>';
+      modalBody.innerHTML = '<div id="modal-loader" class="container"><div class="row my-5"><div class="col-8 mx-auto text-center"><div class="py-3 overflow-hidden"><div class="ball-pulse"><div></div><div></div><div></div></div></div></div></div></div>';
     }
     else {
       document.getElementById('modal-loader').classList.add('d-none');
