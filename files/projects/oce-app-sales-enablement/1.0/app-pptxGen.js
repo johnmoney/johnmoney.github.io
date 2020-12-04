@@ -2,10 +2,10 @@
 (function (window) {
 
   function genPptx() {
-    console.log('genPptx');
+    console.log('pptxGen');
   }
 
   //main entry
-  document.getElementById('genPptx').addEventListener('click', genPptx);
+  document.getElementById('pptxGen').addEventListener('click', genPptx);
 
 })(window);
