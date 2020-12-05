@@ -28,28 +28,30 @@ let getContent = function (id) {
 (function (window) {
 
   function pptxForm() {
-    //get content
+    // 1. Create new presentation
+    let pres = new PptxGenJS();
+
+    // 2. Get content
     let slides = ['CORE0BB171B996274E979737B874F0217A47'];
 
     slides.forEach(function(id) {
       getContent(id).then(function(item) {
-        console.log(item);
+        console.debug(item);
+
+        // 3. Add slide
+        let slide = pres.addSlide();
+
+        // 4. Add headline
+        slide.addText(item.fields.headline, {
+          w: "90%",
+          fontFace: "Arial",
+          fontSize: 24
+        });
+
+        // 5. Save the Presentation
+        pres.writeFile(`${item.name}.pptx`);
       });
     });
-
-    // 1. Create a new Presentation
-    let pres = new PptxGenJS();
-
-    // 2. Add a Slide
-    let slide = pres.addSlide();
-
-    // 3. Add one or more objects (Tables, Shapes, Images, Text and Media) to the Slide
-    let textboxText = "Hello World from PptxGenJS!";
-    let textboxOpts = { x: 1, y: 1, color: '363636', fill: { color:'F1F1F1' }, align: "center" };
-    slide.addText(textboxText, textboxOpts);
-
-    // 4. Save the Presentation
-    pres.writeFile("Sample Presentation.pptx");
   }
 
   //main entry
