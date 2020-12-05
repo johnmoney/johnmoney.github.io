@@ -86,9 +86,9 @@ let getContent = function (contentId) {
   function pptxForm() {
     //get content
     let slides = ['CORE0BB171B996274E979737B874F0217A47'];
-    slideIds.forEach(function(id) {
+    slides.forEach(function(id) {
       getContent(id);
-    }
+    });
 
     // 1. Create a new Presentation
     let pres = new PptxGenJS();
