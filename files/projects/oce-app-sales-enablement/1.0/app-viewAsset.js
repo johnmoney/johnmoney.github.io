@@ -351,7 +351,7 @@
       modalFooter.innerHTML = '';
   
       //add copy asset button
-      let button = document.createElement('div');
+      let button = document.createElement('a');
       button.classList.add('btn');
       button.classList.add('btn-primary');
       button.innerHTML = '<i class="fa fa-cloud-download mr-2" aria-hidden="true"></i>Copy asset';
