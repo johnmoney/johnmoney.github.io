@@ -366,14 +366,11 @@
       let button2 = document.createElement('a');
       button2.classList.add('btn');
       button2.classList.add('btn-secondary');
-      button2.innerHTML = '<i class="fa fa-paint-brush mr-2" aria-hidden="true"></i>Customize asset';
+      button2.innerHTML = '<i class="fa fa-paint-brush mr-2" aria-hidden="true"></i>Customize';
       button2.setAttribute('data-bind', "attr: {href: destination, target: target}, text: name" );
-      button2.setAttribute('href', "javascript:scsPageLink(20)" );
+      //@todo dynamically get page id
+      button2.setAttribute('href', "javascript:scsPageLink(11)" );
       button2.setAttribute('target', "_self" );
-      button2.setAttribute('name', item.name);
-      button2.setAttribute('data-oce-id', item.id);
-      button2.setAttribute('data-mimetype', item.fields.mimeType);
-      button2.setAttribute('data-version', item.fields.version);
       modalFooter.appendChild(button2);
     }
   });
